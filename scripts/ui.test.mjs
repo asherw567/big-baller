@@ -22,6 +22,9 @@ test('mobile UI preserves balance, transactions and working navigation',async()=
   assert.match(js('menuScreen()'),/Security Center/);
   js('state.unlocked=true;state.view="accounts";render()');
   assert.ok(app.innerHTML.includes('$0.00'));
+  assert.ok(app.innerHTML.includes('Everyday Checking ••••8787'));
+  assert.ok(!app.innerHTML.includes('section-eyebrow">Your accounts'));
+  assert.match(app.innerHTML, /<button class="account-title"[^>]*aria-label="View Everyday Checking account ending in 8787"/);
   assert.match(app.innerHTML,/Recent transactions/);
   for(const [view,selector] of [['deposit','deposit-photos'],['transfer','transfer-grid'],['menu','menu-profile']]){
     js('state.view='+JSON.stringify(view)+';render()');
