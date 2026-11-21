@@ -17,11 +17,11 @@ test('mobile UI preserves balance, transactions and working navigation',async()=
   vm.runInContext(await read('ui-polish.js'),context,{filename:'ui-polish.js'});
   const js=code=>vm.runInContext(code,context);
   assert.match(js('subHeader("Deposit")'),/Need help/);
-  assert.match(js('depositScreen()'),/Available balance \\$0\\.00/);
+  assert.ok(js('depositScreen()').includes('Available balance $0.00'));
   assert.match(js('transferScreen()'),/Send money/);
   assert.match(js('menuScreen()'),/Security Center/);
   js('state.unlocked=true;state.view="accounts";render()');
-  assert.match(app.innerHTML,/\\$0\\.00/);
+  assert.ok(app.innerHTML.includes('$0.00'));
   assert.match(app.innerHTML,/Recent transactions/);
   for(const [view,selector] of [['deposit','deposit-photos'],['transfer','transfer-grid'],['menu','menu-profile']]){
     js('state.view='+JSON.stringify(view)+';render()');
