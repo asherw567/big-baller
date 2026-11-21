@@ -81,11 +81,11 @@ body{background:var(--bg);color:var(--ink)}.app-shell{background:var(--bg)}
    home-indicator safe areas. Keep the cream app chrome on authenticated screens. */
 html.bbb-login {
   min-height:100%;
-  background:#73819c url('assets/sunset-login.webp') center center / cover no-repeat fixed;
+  background:#56658f url('assets/sunset-login.webp') center center / cover no-repeat fixed;
 }
 body.bbb-login {
   min-height:100dvh;
-  background:#73819c url('assets/sunset-login.webp') center center / cover no-repeat fixed;
+  background:#56658f url('assets/sunset-login.webp') center center / cover no-repeat fixed;
   overscroll-behavior-y:none;
 }
 body.bbb-login #app {
@@ -94,7 +94,7 @@ body.bbb-login #app {
 }
 body.bbb-login .login-page {
   min-height:100dvh;
-  background:#73819c;
+  background:#56658f;
   isolation:isolate;
 }
 body.bbb-login .login-photo,
@@ -115,4 +115,23 @@ body.bbb-login .login-main {
 }
 html:not(.bbb-login) {
   background:#f8f5f3;
+}
+
+/* Blend the iOS-controlled status-bar fallback into the upper sunset.
+   Actual sampled sky at the first visible photo row is approximately #56658f. */
+body.bbb-login .login-photo::after {
+  content:"";
+  position:absolute;
+  top:0;
+  right:0;
+  left:0;
+  height:110px;
+  pointer-events:none;
+  background:linear-gradient(
+    to bottom,
+    #56658f 0%,
+    rgba(86,101,143,.68) 26%,
+    rgba(86,101,143,.22) 67%,
+    rgba(86,101,143,0) 100%
+  );
 }

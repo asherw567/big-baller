@@ -339,7 +339,7 @@ function syncDisplayChrome() {
   document.documentElement?.classList?.toggle?.('bbb-login', login);
   document.body?.classList?.toggle?.('bbb-login', login);
   const theme = $('meta[name="theme-color"]');
-  if (theme) theme.setAttribute('content', login ? '#73819c' : '#f8f5f3');
+  if (theme) theme.setAttribute('content', login ? '#56658f' : '#f8f5f3');
   const status = $('meta[name="apple-mobile-web-app-status-bar-style"]');
   if (status) status.setAttribute('content', login ? 'black-translucent' : 'default');
 }
