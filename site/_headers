@@ -1,0 +1,11 @@
+/*
+  Cache-Control: no-cache, max-age=0, must-revalidate
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: same-origin
+  X-Robots-Tag: noindex, nofollow
+/sw.js
+  ! Cache-Control
+  Cache-Control: no-store
+/version.json
+  ! Cache-Control
+  Cache-Control: no-store
