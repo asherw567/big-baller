@@ -1,4 +1,4 @@
-/* BigBallerBank v1.4: refined cinematic banking UI. Financial state remains unchanged. */
+/* Wells Fargo v1.4: refined cinematic banking UI. Financial state remains unchanged. */
 'use strict';
 state.depositAmount = '';
 state.depositFront = false;
@@ -49,7 +49,7 @@ function menuScreen() {return `<div class="sub-content menu-page">
 </div>`;}
 function transferFormSheet() {showSheet(`<h2>Transfer money</h2><p>Choose the account and amount to transfer.</p><form id="transfer-form">
   <div class="form-group"><label class="form-label" for="from-account">From account</label><select class="form-control" id="from-account"><option>Everyday Checking ••••8787 — ${money(SCENE_BALANCE_CENTS)}</option></select></div>
-  <div class="form-group"><label class="form-label" for="to-account">To account</label><select class="form-control" id="to-account"><option value="savings">BigBaller Savings ••••2204</option><option value="external">External account</option></select></div>
+  <div class="form-group"><label class="form-label" for="to-account">To account</label><select class="form-control" id="to-account"><option value="savings">Wells Fargo Savings ••••2204</option><option value="external">External account</option></select></div>
   <div class="form-group"><label class="form-label" for="transfer-amount">Transfer amount</label><input class="form-control" id="transfer-amount" inputmode="decimal" type="number" min="0.01" step="0.01" placeholder="0.00" required/><div class="form-help">Available to transfer: ${money(SCENE_BALANCE_CENTS)}</div></div>
   <div class="form-group"><label class="form-label">Transfer date</label><div class="form-control" style="background:#f9f7f8">Today</div></div>
   <button class="primary-btn" type="submit">Review transfer</button></form>`);}
@@ -64,7 +64,7 @@ const polishedActions = {
   'wire-money': () => infoSheet('Wire money','Set up a domestic wire transfer.'),
   'international-transfer': () => infoSheet('International transfers','Review international transfer options.'),
   'activity-forecast': () => showSheet(`<h2>Activity forecast</h2><p>No transfers are currently scheduled.</p><div class="info-block">${icon('calendar')} ${ledger.length} transactions posted over the last 14 days.</div><button class="primary-btn" data-action="sheet-close">Done</button>`),
-  'share-feedback': () => infoSheet('Share feedback','For assistance, contact Ask Baller through Help & Support.')
+  'share-feedback': () => infoSheet('Share feedback','For assistance, contact Ask Fargo through Help & Support.')
 };
 app.addEventListener('click',e=>{
   const btn=e.target.closest('[data-action]');if(!btn||!app.contains(btn))return;
@@ -78,7 +78,7 @@ app.addEventListener('input',e=>{
 },true);
 
 
-/* BigBallerBank v1.6 — editorial account overview and bank-statement activity. */
+/* Wells Fargo v1.6 — editorial account overview and bank-statement activity. */
 state.accountTab = 'overview';
 state.accountTransactionFilter = 'all';
 state.accountTransactionQuery = '';
