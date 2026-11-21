@@ -76,3 +76,130 @@ app.addEventListener('input',e=>{
   state.depositAmount=e.target.value;
   const btn=$('#deposit-submit');if(btn)btn.disabled=!(Number(state.depositAmount)>0&&Number(state.depositAmount)<=15000&&state.depositFront&&state.depositBack);
 },true);
+
+
+/* BigBallerBank v1.6 — editorial account overview and bank-statement activity. */
+state.accountTab = 'overview';
+state.accountTransactionFilter = 'all';
+state.accountTransactionQuery = '';
+state.accountSearchOpen = false;
+
+const existingBankSubHeader = subHeader;
+subHeader = function(title) {
+  if (title !== 'Account details') return existingBankSubHeader(title);
+  return `<header class="account-detail-toolbar">
+    <button class="account-detail-back" data-action="back" aria-label="Back to accounts">${icon('left','lg')}</button>
+    <button class="account-toolbar-help" data-action="search" aria-label="Help and search">${icon('search','sm')}<span>Need help?</span>${icon('chat','md')}</button>
+    <div class="account-toolbar-spacer"></div>
+    <button class="mini-icon-btn" data-action="notifications" aria-label="Notifications">${icon('bell','lg')}${!state.notificationsRead?'<span class="bubble">8</span>':''}</button>
+    <button class="signoff" data-action="signoff">Sign off</button>
+  </header>`;
+};
+function statementDescription(t) {
+  const merchant = String(t.merchant).toLocaleUpperCase('en-US');
+  if(t.kind==='card') return 'PURCHASE ' + merchant + ' CARD8787';
+  if(t.kind==='deposit') return 'DIRECT DEPOSIT ' + merchant;
+  if(t.kind==='credit') return merchant;
+  return merchant;
+}
+function statementRow(t, compact=false) {
+  const price=t.amount>0? '+'+money(t.amount):money(Math.abs(t.amount));
+  return `<button class="bank-statement-row ${compact?'compact':''}" data-action="transaction-${t.id}" aria-label="${esc(t.merchant)}, ${esc(money(t.amount,true))}, ${esc(dateDisplay(t))}, posted">
+    <span class="bank-statement-description"><span class="bank-statement-date">${esc(transactionDate(t).toLocaleDateString('en-US',{month:'2-digit',day:'2-digit',year:'numeric'}))}</span><span class="bank-statement-merchant">${esc(statementDescription(t))}</span></span>
+    <span class="bank-statement-amount"><strong class="${t.amount>0?'credit':''}">${price}</strong><small>Posted</small></span>
+  </button>`;
+}
+transactionRow = function(t, compact=false) {return statementRow(t,compact);};
+
+function visibleBankTransactions() {
+  const q=state.accountTransactionQuery.trim().toLocaleLowerCase('en-US');
+  return ledger.filter(t=>{
+    const kind=state.accountTransactionFilter;
+    if(kind==='debits' && t.amount>=0)return false;
+    if(kind==='credits' && t.amount<=0)return false;
+    return !q || [t.merchant,t.detail,statementDescription(t),dateDisplay(t),money(t.amount,true)].some(v=>String(v).toLocaleLowerCase('en-US').includes(q));
+  });
+}
+function bankTransactionList() {
+  const entries=visibleBankTransactions();
+  if(!entries.length)return '<div class="bank-statement-empty">No matching transactions. Try a different search or filter.</div>';
+  return entries.map(t=>statementRow(t)).join('');
+}
+function updateBankTransactionList() {
+  const list=$('#bank-statement-results');
+  if(list)list.innerHTML=bankTransactionList();
+  const count=$('#bank-statement-count');
+  if(count)count.textContent=visibleBankTransactions().length + ' transactions';
+}
+function bankAccountOverview() {
+  return `<div class="bank-transactions-header">
+    <h2>Transactions <button class="bank-info" data-action="statement" aria-label="About transaction history">${icon('info','sm')}</button></h2>
+    <div class="bank-activity-tools">
+      <button data-action="bank-search-toggle" aria-expanded="${state.accountSearchOpen?'true':'false'}">${icon('search','sm')} Search</button>
+      <button data-action="bank-filter">${icon('settings','sm')} Filter</button>
+    </div>
+  </div>
+  ${state.accountSearchOpen?`<div class="bank-search-box"><input id="bank-transaction-query" autocomplete="off" type="search" aria-label="Search transactions" placeholder="Search transactions" value="${esc(state.accountTransactionQuery)}"></div>`:''}
+  ${state.accountTransactionFilter!=='all'?`<div class="bank-active-filter"><span>${state.accountTransactionFilter==='credits'?'Money in':'Money out'}</span><button data-action="bank-filter-clear">Clear filter</button></div>`:''}
+  <div class="bank-statement-list" id="bank-statement-results">${bankTransactionList()}</div>
+  <div class="bank-statement-bottom"><span id="bank-statement-count">${visibleBankTransactions().length} transactions</span><button data-action="statement">Activity summary ${icon('chevron','xs')}</button></div>`;
+}
+function bankAccountManage() {
+  return `<div class="bank-secondary-content">
+    <h2>Manage your account</h2>
+    <button class="bank-manage-item" data-action="transfer">${icon('transfer','md')}<span>Transfer money</span>${icon('chevron','sm')}</button>
+    <button class="bank-manage-item" data-action="deposit">${icon('deposit','md')}<span>Mobile deposit</span>${icon('chevron','sm')}</button>
+    <button class="bank-manage-item" data-action="debit-card">${icon('card','md')}<span>Card settings</span>${icon('chevron','sm')}</button>
+    <button class="bank-manage-item" data-action="statement">${icon('calendar','md')}<span>Statements & documents</span>${icon('chevron','sm')}</button>
+  </div>`;
+}
+function bankAccountRouting() {
+  return `<div class="bank-secondary-content">
+    <h2>Routing & balance info</h2>
+    <div class="bank-balance-info-row"><span>Account</span><strong>Everyday Checking ••••8787</strong></div>
+    <div class="bank-balance-info-row"><span>Available balance</span><strong>${money(SCENE_BALANCE_CENTS)}</strong></div>
+    <div class="bank-balance-info-row"><span>Current balance</span><strong>${money(SCENE_BALANCE_CENTS)}</strong></div>
+    <div class="bank-balance-info-row"><span>Account status</span><strong>Active</strong></div>
+    <button class="bank-info-link" data-action="account-details">View account information ${icon('chevron','sm')}</button>
+  </div>`;
+}
+accountScreen = function() {
+  const tab=state.accountTab;
+  return `<div class="bank-account-page">
+    <section class="bank-account-overview">
+      <div class="bank-account-name">Everyday Checking ••••8787</div>
+      <div class="bank-account-balance">${money(SCENE_BALANCE_CENTS)}</div>
+      <div class="bank-account-balance-label">Available balance ${icon('info','xs')}</div>
+      <button class="bank-info-link" data-action="account-details">Account & routing numbers ${icon('chevron','sm')}</button>
+    </section>
+    <section class="bank-account-sheet">
+      <div class="bank-account-tabs" role="tablist" aria-label="Checking account sections">
+        <button role="tab" aria-selected="${tab==='overview'}" class="${tab==='overview'?'active':''}" data-action="bank-tab-overview">Overview</button>
+        <button role="tab" aria-selected="${tab==='manage'}" class="${tab==='manage'?'active':''}" data-action="bank-tab-manage">Manage</button>
+        <button role="tab" aria-selected="${tab==='routing'}" class="${tab==='routing'?'active':''}" data-action="bank-tab-routing">Routing &amp;<br> balance info</button>
+      </div>
+      <div class="bank-account-sheet-content">${tab==='overview'?bankAccountOverview():tab==='manage'?bankAccountManage():bankAccountRouting()}</div>
+    </section>
+  </div>`;
+};
+
+Object.assign(polishedActions, {
+  'bank-tab-overview':()=>{state.accountTab='overview';render();},
+  'bank-tab-manage':()=>{state.accountTab='manage';render();},
+  'bank-tab-routing':()=>{state.accountTab='routing';render();},
+  'bank-search-toggle':()=>{state.accountSearchOpen=!state.accountSearchOpen;if(!state.accountSearchOpen)state.accountTransactionQuery='';render();},
+  'bank-filter':()=>showSheet(`<h2>Filter transactions</h2><p>Show activity by transaction type.</p><div class="bank-filter-options">
+    <button data-action="bank-filter-all">All transactions</button>
+    <button data-action="bank-filter-debits">Money out</button>
+    <button data-action="bank-filter-credits">Money in</button>
+  </div><button class="secondary-btn" data-action="sheet-close">Cancel</button>`),
+  'bank-filter-clear':()=>{state.accountTransactionFilter='all';render();},
+  'bank-filter-all':()=>{state.accountTransactionFilter='all';closeSheet();render();},
+  'bank-filter-debits':()=>{state.accountTransactionFilter='debits';closeSheet();render();},
+  'bank-filter-credits':()=>{state.accountTransactionFilter='credits';closeSheet();render();}
+});
+app.addEventListener('input',e=>{
+  if(e.target.id!=='bank-transaction-query')return;
+  state.accountTransactionQuery=e.target.value.slice(0,100);
+  updateBankTransactionList();
+},true);
