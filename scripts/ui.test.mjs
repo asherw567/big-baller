@@ -47,3 +47,18 @@ test('mobile UI preserves balance, transactions and working navigation',async()=
   assert.doesNotMatch(app.innerHTML,/id="deposit-submit"[^>]*disabled/);
   assert.equal(js('TRANSACTIONS.reduce((sum,t)=>sum+t.amount,0)'),0);
 });
+
+test('iPhone login paints behind safe areas without changing banking chrome', async () => {
+  const html = await read('index.html');
+  const css = await read('ui-polish.css');
+  const js = await read('app.js');
+  assert.match(html, /name="viewport"[^>]*viewport-fit=cover/);
+  assert.match(html, /name="apple-mobile-web-app-status-bar-style" content="black-translucent"/);
+  assert.match(css, /html\.bbb-login\s*\{/);
+  assert.match(css, /body\.bbb-login\s*\{/);
+  assert.match(css, /body\.bbb-login \.login-photo,[\s\S]*?position:fixed;/);
+  assert.match(css, /body\.bbb-login \.login-main\s*\{\s*min-height:100dvh;/);
+  assert.match(css, /html:not\(\.bbb-login\)\s*\{\s*background:#f8f5f3;/);
+  assert.match(js, /syncDisplayChrome\(\);\s*if \(!state\.unlocked\)/);
+  assert.match(js, /login \? '#73819c' : '#f8f5f3'/);
+});
