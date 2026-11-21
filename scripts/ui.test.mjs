@@ -60,5 +60,7 @@ test('iPhone login paints behind safe areas without changing banking chrome', as
   assert.match(css, /body\.bbb-login \.login-main\s*\{\s*min-height:100dvh;/);
   assert.match(css, /html:not\(\.bbb-login\)\s*\{\s*background:#f8f5f3;/);
   assert.match(js, /syncDisplayChrome\(\);\s*if \(!state\.unlocked\)/);
-  assert.match(js, /login \? '#73819c' : '#f8f5f3'/);
+  assert.match(js, /login \\? '#56658f' : '#f8f5f3'/);
+  assert.match(css, /html\\.bbb-login\\s*\\{[\\s\\S]*?#56658f/);
+  assert.match(css, /body\\.bbb-login \\.login-photo::after\\s*\\{[\\s\\S]*?linear-gradient\\(/);
 });
