@@ -27,6 +27,7 @@ test('mobile UI preserves balance, transactions and working navigation',async()=
     js('state.view='+JSON.stringify(view)+';render()');
     assert.match(app.innerHTML,new RegExp(selector));
   }
+  js('state.view="deposit";render()');
   const click=app.listeners.click.find(listener=>listener.capture===true).callback;
   for(const action of ['deposit-photo-front','deposit-photo-back']){
     click({target:{closest:()=>({dataset:{action}})},preventDefault(){},stopImmediatePropagation(){}});
