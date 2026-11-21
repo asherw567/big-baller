@@ -76,3 +76,43 @@ body{background:var(--bg);color:var(--ink)}.app-shell{background:var(--bg)}
 .home-hero .hero-top{min-height:40px}
 .account-outer .account-offer .offer-copy{padding-top:12px}
 @media(max-width:375px){.greeting{font-size:27px}.account-outer .account-title{font-size:14.5px}.account-outer .balance{font-size:31px}}
+
+/* iPhone Home Screen: paint the sign-in photograph through the status bar and
+   home-indicator safe areas. Keep the cream app chrome on authenticated screens. */
+html.bbb-login {
+  min-height:100%;
+  background:#73819c url('assets/sunset-login.webp') center center / cover no-repeat fixed;
+}
+body.bbb-login {
+  min-height:100dvh;
+  background:#73819c url('assets/sunset-login.webp') center center / cover no-repeat fixed;
+  overscroll-behavior-y:none;
+}
+body.bbb-login #app {
+  min-height:100dvh;
+  background:transparent;
+}
+body.bbb-login .login-page {
+  min-height:100dvh;
+  background:#73819c;
+  isolation:isolate;
+}
+body.bbb-login .login-photo,
+body.bbb-login .login-page::before {
+  position:fixed;
+  inset:0;
+}
+body.bbb-login .login-photo {
+  z-index:-2;
+  background-position:center center;
+  background-size:cover;
+}
+body.bbb-login .login-page::before {
+  z-index:-1;
+}
+body.bbb-login .login-main {
+  min-height:100dvh;
+}
+html:not(.bbb-login) {
+  background:#f8f5f3;
+}
