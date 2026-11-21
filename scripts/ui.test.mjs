@@ -26,6 +26,12 @@ test('mobile UI preserves balance, transactions and working navigation',async()=
   assert.ok(!app.innerHTML.includes('section-eyebrow">Your accounts'));
   assert.match(app.innerHTML, /<button class="account-title"[^>]*aria-label="View Everyday Checking account ending in 8787"/);
   assert.match(app.innerHTML,/Recent transactions/);
+  const ui=(await read('ui-polish.css'));
+  assert.match(ui,/\.greeting\{[^}]*margin:0 0 20px/);
+  assert.match(ui,/\.account-outer \.balance\{font:300 32px/);
+  assert.ok(app.innerHTML.indexOf('Open an account') < app.innerHTML.indexOf('Recent transactions'), 'product module should follow checking card before transaction list');
+  assert.ok(app.innerHTML.indexOf('Everyday Checking ••••8787') < app.innerHTML.indexOf('Open an account'));
+
   for(const [view,selector] of [['deposit','deposit-photos'],['transfer','transfer-grid'],['menu','menu-profile']]){
     js('state.view='+JSON.stringify(view)+';render()');
     assert.match(app.innerHTML,new RegExp(selector));
