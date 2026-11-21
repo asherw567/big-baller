@@ -1,7 +1,7 @@
 {
-  "name": "BigBallerBank",
-  "short_name": "BigBallerBank",
-  "description": "BigBallerBank cinematic interactive experience",
+  "name": "Wells Fargo",
+  "short_name": "Wells Fargo",
+  "description": "Private Wells Fargo-branded fictional banking experience for authorized film production",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
