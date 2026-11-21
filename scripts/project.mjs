@@ -11,11 +11,16 @@ export async function checkProject() {
   if (!account || !token || !name) throw new Error('Configure all three Cloudflare repository secrets first.');
   if (!/^[a-f0-9]{32}$/i.test(account) || !/^[a-z0-9][a-z0-9-]*$/.test(name))
     throw new Error('Invalid account ID or project name.');
+  if (token !== token.trim() || /\s/.test(token)) throw new Error('API token contains whitespace; copy only the token value into the repository secret.');
+  if (token === account || token === name || token.length < 30) throw new Error('API token secret does not appear to contain a full API token value.');
   const response = await fetch(`https://api.cloudflare.com/client/v4/accounts/${account}/pages/projects/${encodeURIComponent(name)}`, {
     headers: { Authorization: `Bearer ${token}` }, signal: AbortSignal.timeout(30000)
   });
-  if (!response.ok) throw new Error(`Unable to read existing Cloudflare project (HTTP ${response.status}).`);
-  const body = await response.json();
+  const body = await response.json().catch(() => ({}));
+  if (!response.ok) {
+    const codes = (Array.isArray(body.errors) ? body.errors : []).map(error => error.code).filter(Number.isInteger).slice(0, 5);
+    throw new Error(`Unable to read existing Cloudflare project (HTTP ${response.status}; Cloudflare codes: ${codes.join(',') || 'none'}).`);
+  }
   if (!body.success) throw new Error('Cloudflare rejected project lookup.');
   const branch = validateProject(body.result, name);
   await appendFile(process.env.GITHUB_ENV, `PAGES_PRODUCTION_BRANCH=${branch}\n`);
