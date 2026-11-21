@@ -16,7 +16,7 @@ function subHeader(title) {
 }
 function depositScreen() {return `<div class="sub-content deposit-page">
   <section class="deposit-surface">
-    <div class="deposit-account"><span class="deposit-overline">To</span><strong>Everyday Checking ••••8787</strong><span>Available balance $0.00</span></div>
+    <div class="deposit-account"><span class="deposit-overline">To</span><strong>Everyday Checking ••••8787</strong><span>Available balance ${money(SCENE_BALANCE_CENTS)}</span></div>
     <div class="deposit-amount-zone"><label for="deposit-amount">Amount</label><div class="deposit-amount-field"><span>$</span><input id="deposit-amount" inputmode="decimal" autocomplete="off" aria-label="Check amount" placeholder="0.00" value="${esc(state.depositAmount)}" /></div><p>30-day deposit limit $15,000.00</p></div>
     <div class="deposit-photos"><span class="deposit-overline">Photos ${icon('info','xs')}</span><div class="deposit-photo-grid">
       <button class="deposit-photo ${state.depositFront?'captured':''}" data-action="deposit-photo-front"><span class="photo-symbol">${icon(state.depositFront?'check':'camera','lg')}</span><span>${state.depositFront?'Front image ready':'Front of check'}</span></button>
@@ -48,9 +48,9 @@ function menuScreen() {return `<div class="sub-content menu-page">
   <button class="menu-legal" data-action="about">Legal and privacy information ${icon('chevron','sm')}</button>
 </div>`;}
 function transferFormSheet() {showSheet(`<h2>Transfer money</h2><p>Choose the account and amount to transfer.</p><form id="transfer-form">
-  <div class="form-group"><label class="form-label" for="from-account">From account</label><select class="form-control" id="from-account"><option>Everyday Checking ••••8787 — $0.00</option></select></div>
+  <div class="form-group"><label class="form-label" for="from-account">From account</label><select class="form-control" id="from-account"><option>Everyday Checking ••••8787 — ${money(SCENE_BALANCE_CENTS)}</option></select></div>
   <div class="form-group"><label class="form-label" for="to-account">To account</label><select class="form-control" id="to-account"><option value="savings">BigBaller Savings ••••2204</option><option value="external">External account</option></select></div>
-  <div class="form-group"><label class="form-label" for="transfer-amount">Transfer amount</label><input class="form-control" id="transfer-amount" inputmode="decimal" type="number" min="0.01" step="0.01" placeholder="0.00" required/><div class="form-help">Available to transfer: $0.00</div></div>
+  <div class="form-group"><label class="form-label" for="transfer-amount">Transfer amount</label><input class="form-control" id="transfer-amount" inputmode="decimal" type="number" min="0.01" step="0.01" placeholder="0.00" required/><div class="form-help">Available to transfer: ${money(SCENE_BALANCE_CENTS)}</div></div>
   <div class="form-group"><label class="form-label">Transfer date</label><div class="form-control" style="background:#f9f7f8">Today</div></div>
   <button class="primary-btn" type="submit">Review transfer</button></form>`);}
 const polishedActions = {
@@ -59,7 +59,7 @@ const polishedActions = {
   'deposit-photo-front': () => {state.depositFront=!state.depositFront;render();toast(state.depositFront?'Image added':'Image removed');},
   'deposit-photo-back': () => {state.depositBack=!state.depositBack;render();toast(state.depositBack?'Image added':'Image removed');},
   'open-transfer-form': transferFormSheet,
-  'send-money': () => infoSheet('Send money','Choose a recipient to get started. Your checking balance is currently $0.00.'),
+  'send-money': () => infoSheet('Send money','Choose a recipient to get started. Your checking balance is currently ' + money(SCENE_BALANCE_CENTS) + '.'),
   'pay-bills': () => infoSheet('Pay bills','View scheduled payments or set up a new bill payment.'),
   'wire-money': () => infoSheet('Wire money','Set up a domestic wire transfer.'),
   'international-transfer': () => infoSheet('International transfers','Review international transfer options.'),
