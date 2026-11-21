@@ -52,6 +52,34 @@ test('mobile UI preserves balance, transactions and working navigation',async()=
   assert.ok(js('statementSheet.toString()').includes('SCENE_BALANCE_CENTS'));
   assert.ok(js('accountScreen()').includes('$88,362.21'));
   assert.ok(js('depositScreen()').includes('$88,362.21'));
+
+  // The account screen is now a statement-style ledger with native-sized type.
+  js('state.view="account";render()');
+  assert.match(app.innerHTML,/class="bank-account-page"/);
+  assert.match(app.innerHTML,/class="bank-account-balance">\$88,362\.21/);
+  assert.match(app.innerHTML,/role="tablist"/);
+  assert.match(app.innerHTML,/Routing &amp;/);
+  assert.match(app.innerHTML,/PURCHASE MOBIL CARD8787/);
+  assert.match(app.innerHTML,/>Posted</);
+  assert.match(app.innerHTML,/27 transactions/);
+  const statementCSS=await read('ui-polish.css');
+  assert.ok(statementCSS.includes("font-family:-apple-system,BlinkMacSystemFont"));
+  assert.ok(statementCSS.includes(".bank-statement-row{"));
+  assert.ok(statementCSS.includes(".bank-account-tabs{"));
+  js("polishedActions['bank-tab-manage']()");
+  assert.match(app.innerHTML,/Manage your account/);
+  js("polishedActions['bank-tab-routing']()");
+  assert.match(app.innerHTML,/Routing & balance info/);
+  assert.match(app.innerHTML,/\$88,362\.21/);
+  js("polishedActions['bank-tab-overview']()");
+  js("polishedActions['bank-filter-debits']()");
+  assert.equal(js('visibleBankTransactions().length'),25);
+  js("polishedActions['bank-filter-credits']()");
+  assert.equal(js('visibleBankTransactions().length'),2);
+  js("polishedActions['bank-filter-all']()");
+  js('state.accountTransactionQuery="Mobil"');
+  assert.equal(js('visibleBankTransactions().length'),1);
+  js('state.accountTransactionQuery=""');
 });
 
 test('iPhone login paints behind safe areas without changing banking chrome', async () => {
