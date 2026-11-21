@@ -135,3 +135,140 @@ body.bbb-login .login-photo::after {
     rgba(86,101,143,0) 100%
   );
 }
+
+/* Checking-account details: close-up typography, reference-sized rows, original brand. */
+.app-shell{font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif}
+.app-shell button,.app-shell input,.app-shell select{font-family:inherit}
+.account-detail-toolbar{
+  display:flex;align-items:center;gap:11px;
+  background:#eeecea;padding:calc(env(safe-area-inset-top) + 9px) 16px 8px;
+  min-height:calc(env(safe-area-inset-top) + 60px);
+}
+.account-detail-back{
+  display:grid;place-items:center;background:transparent;border:0;color:#252326;
+  flex:0 0 28px;height:43px;padding:0;
+}
+.account-detail-back .icon{width:27px;height:27px}
+.account-toolbar-help{
+  display:flex;align-items:center;gap:8px;color:#3d383a;background:#fff;
+  border:1px solid #e2dbd8;border-radius:26px;padding:0 11px;height:40px;min-width:0;
+  font-size:13px;letter-spacing:-.2px;white-space:nowrap;
+}
+.account-toolbar-help>.icon:last-child{border-left:1px solid #ddd5d4;padding-left:10px;box-sizing:content-box;color:#654180}
+.account-toolbar-spacer{flex:1}
+.account-detail-toolbar .mini-icon-btn{flex:0 0 34px;width:34px;height:38px;padding:4px}
+.account-detail-toolbar .signoff{font-size:12.5px}
+.bank-account-page{background:#f3f0ee;min-height:calc(100dvh - 90px)}
+.bank-account-overview{
+  text-align:center;padding:26px 16px 18px;background:linear-gradient(180deg,#eeecea 0%,#f5f2f0 100%);
+}
+.bank-account-name{font-size:14px;letter-spacing:-.2px;font-weight:510;color:#444045;line-height:1.4}
+.bank-account-balance{
+  color:#171619;font-size:clamp(38px,11.1vw,49px);font-weight:370;line-height:1.13;
+  letter-spacing:-1.35px;font-variant-numeric:proportional-nums;margin:11px 0 5px;
+}
+.bank-account-balance-label{display:flex;align-items:center;justify-content:center;gap:8px;font-size:14px;color:#3e3a3d;font-weight:410}
+.bank-account-balance-label>.icon{width:15px;height:15px;color:#777176}
+.bank-info-link{
+  display:inline-flex;justify-content:center;align-items:center;gap:5px;color:#6e4898;
+  border:0;background:transparent;font-size:14px;font-weight:680;letter-spacing:-.15px;
+  padding:8px 6px;
+}
+.bank-account-overview>.bank-info-link{margin-top:21px}
+.bank-account-sheet{
+  background:#fff;border-radius:26px 26px 0 0;min-height:calc(100dvh - 360px);
+  padding-bottom:calc(env(safe-area-inset-bottom) + 95px);overflow:hidden;
+}
+.bank-account-tabs{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+  align-items:stretch;border-bottom:1px solid #e6e3e2;padding:7px 13px 0;
+}
+.bank-account-tabs button{
+  border:0;border-bottom:3px solid transparent;background:#fff;color:#231f23;
+  padding:10px 4px 12px;font-size:14px;font-weight:440;line-height:1.25;
+  min-height:55px;white-space:normal;letter-spacing:-.2px;
+}
+.bank-account-tabs button.active{border-bottom-color:#2f282e;font-weight:700}
+.bank-account-sheet-content{padding-top:8px}
+.bank-transactions-header{
+  display:flex;align-items:center;justify-content:space-between;gap:8px;
+  padding:14px 14px 13px;
+}
+.bank-transactions-header h2{
+  font-size:20px;font-weight:400;line-height:1.2;margin:0;
+  letter-spacing:-.4px;white-space:nowrap;display:flex;align-items:center;gap:5px;
+}
+.bank-info{display:grid;place-items:center;border:0;background:transparent;color:#5c565a;padding:3px}
+.bank-info .icon{width:15px;height:15px}
+.bank-activity-tools{display:flex;align-items:center;gap:12px}
+.bank-activity-tools button{
+  display:flex;align-items:center;gap:4px;padding:6px 0;border:0;background:transparent;
+  white-space:nowrap;color:#222023;font-size:12.5px;font-weight:440;
+}
+.bank-activity-tools .icon{width:17px;height:17px}
+.bank-statement-list{margin:0 14px;border:1px solid #f0ecea;border-radius:14px;overflow:hidden;box-shadow:0 3px 14px #372e3609}
+.bank-statement-row{
+  background:#fff;border:0;border-bottom:1px solid #e9e5e4;display:flex;width:100%;
+  padding:15px 15px 16px;align-items:center;gap:10px;text-align:left;color:#222023;
+  min-height:87px;cursor:pointer;
+}
+.bank-statement-row:last-child{border-bottom:0}
+.bank-statement-description{display:flex;flex-direction:column;gap:7px;flex:1;min-width:0}
+.bank-statement-date{color:#817a7c;font-size:12px;line-height:1.2;white-space:nowrap}
+.bank-statement-merchant{
+  font-size:14px;line-height:1.35;letter-spacing:-.08px;font-weight:420;
+  overflow-wrap:anywhere;
+}
+.bank-statement-amount{
+  display:flex;flex-direction:column;align-items:flex-end;justify-content:center;flex:0 0 auto;
+  min-width:70px;max-width:35%;gap:6px;text-align:right;
+}
+.bank-statement-amount strong{font-size:15px;font-weight:630;color:#201e21;letter-spacing:-.15px;white-space:nowrap}
+.bank-statement-amount strong.credit{color:#356b4a}
+.bank-statement-amount small{font-size:12px;color:#857e81;line-height:1.1}
+.bank-statement-bottom{display:flex;justify-content:space-between;align-items:center;padding:18px 19px 8px;color:#827a7e;font-size:12px}
+.bank-statement-bottom button{display:flex;align-items:center;gap:2px;color:#6d498f;background:none;border:0;font-weight:650;font-size:12px}
+.bank-search-box{padding:3px 16px 12px}
+.bank-search-box input{
+  display:block;width:100%;height:39px;border-radius:12px;border:1px solid #ded7d4;
+  padding:0 13px;background:#f9f7f6;font-size:14px;outline-color:#744c90;color:#29252b;
+}
+.bank-filter-options{display:flex;gap:7px;flex-wrap:wrap;padding:0 15px 12px}
+.bank-filter-options button{
+  background:#f8f5f6;color:#513768;border:1px solid #e7dfe9;border-radius:20px;
+  padding:8px 12px;font-size:12px;font-weight:600;
+}
+.bank-active-filter{display:flex;gap:12px;align-items:center;padding:1px 17px 11px;font-size:12px;color:#6f5c75}
+.bank-active-filter button{border:0;background:none;color:#644283;text-decoration:underline;font-size:12px}
+.bank-statement-empty{padding:29px 16px;text-align:center;color:#817a7e;font-size:13px}
+.bank-secondary-content{padding:26px 19px;min-height:290px}
+.bank-secondary-content h2{font-size:23px;font-weight:440;margin:0 0 21px;letter-spacing:-.5px}
+.bank-manage-item{
+  display:flex;align-items:center;gap:14px;border:0;border-bottom:1px solid #e9e5e4;
+  background:#fff;color:#272227;width:100%;text-align:left;padding:17px 5px;
+}
+.bank-manage-item span:nth-child(2){flex:1;font-size:15px;font-weight:530}
+.bank-manage-item .icon{color:#634781}
+.bank-manage-item .icon:last-child{color:#898389}
+.bank-balance-info-row{display:flex;justify-content:space-between;gap:20px;padding:16px 0;border-bottom:1px solid #eee9e7}
+.bank-balance-info-row>span{font-size:13px;color:#787177}
+.bank-balance-info-row strong{font-size:13px;font-weight:550;text-align:right}
+.bank-secondary-content>.bank-info-link{margin-top:20px;padding-left:0}
+.recent-home .bank-statement-list{margin:0}
+.recent-home .bank-statement-row{padding:12px 0;min-height:74px}
+.recent-home .bank-statement-merchant{font-size:12.5px}
+.recent-home .bank-statement-amount strong{font-size:13px}
+.recent-home .bank-statement-date{font-size:11px}
+@media(max-width:375px){
+  .account-detail-toolbar{gap:6px;padding-left:10px;padding-right:10px}
+  .account-toolbar-help{gap:6px;padding:0 8px;font-size:12px}
+  .account-detail-toolbar .signoff{font-size:11.5px}
+  .bank-transactions-header{padding:12px 10px}
+  .bank-transactions-header h2{font-size:18px}
+  .bank-activity-tools{gap:8px}
+  .bank-activity-tools button{font-size:11px}
+  .bank-statement-list{margin:0 9px}
+  .bank-statement-row{padding:14px 10px}
+  .bank-statement-merchant{font-size:13px}
+  .bank-statement-amount strong{font-size:14px}
+}
