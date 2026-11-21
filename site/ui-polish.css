@@ -1,19 +1,19 @@
 /* BigBallerBank v1.4 — refined iPhone banking UI */
 :root{--ink:#17151a;--muted:#777079;--bg:#f7f4f1;--line:#e9e4e0;--brand:#513668;--brand-dark:#301b40;--shadow:0 8px 26px rgba(46,34,43,.045)}
 body{background:var(--bg);color:var(--ink)}.app-shell{background:var(--bg)}
-.home-hero{background:repeating-linear-gradient(45deg,transparent 0px,transparent 115px,#cbbfc01c 115px,#cbbfc01c 230px),linear-gradient(120deg,#f9f7f5,#eee7e3);padding:calc(env(safe-area-inset-top) + 19px) 17px 29px}
+.home-hero{background:repeating-linear-gradient(45deg,transparent 0px,transparent 115px,#cbbfc01c 115px,#cbbfc01c 230px),linear-gradient(120deg,#f9f7f5,#eee7e3);padding:calc(env(safe-area-inset-top) + 19px) 17px 15px}
 .hero-top{min-height:40px}.wordmark{font:750 16px/1.1 'Manrope',sans-serif;letter-spacing:-.65px;gap:9px}
 .wordmark .brand-mark{width:33px;height:33px;font-size:22px;border-radius:9px}.hero-tools{gap:7px}
 .mini-icon-btn{width:44px;height:44px;display:grid;place-items:center;position:relative}.signoff{font-size:13px;font-weight:500;white-space:nowrap}
-.greeting{font:440 clamp(30px,7.6vw,37px)/1.17 'DM Sans',-apple-system,sans-serif;letter-spacing:-1.3px;margin:38px 0 28px}
-.search-row{gap:11px}.search-pill{height:53px;border:1px solid #e1dad6;border-radius:30px;font-size:14px;box-shadow:0 1px 2px #30202808;color:#918991}.search-pill .icon{color:#968c91}
-.chat-head{width:52px;height:52px;flex:0 0 52px;border-radius:17px;box-shadow:none;background:#513365}
-.main-cards{padding:14px 14px 36px;gap:17px}.panel{border:1px solid #ede8e5;border-radius:25px;box-shadow:0 8px 24px rgba(49,30,41,.045)}.panel.pad{padding:21px 19px}
-.account-outer{margin-inline:-14px;padding:15px;border-radius:28px}.account-outer .account-inner{padding:19px 15px 15px;border-radius:23px;border:1px solid #e8e2df;box-shadow:none}
+.greeting{font:440 clamp(28px,7vw,33px)/1.17 'DM Sans',-apple-system,sans-serif;letter-spacing:-1.05px;margin:0 0 20px}
+.search-row{gap:11px}.search-pill{height:38px;border:1px solid #e1dad6;border-radius:30px;font-size:13px;box-shadow:0 1px 2px #30202808;color:#918991}.search-pill .icon{color:#968c91}
+.chat-head{width:38px;height:38px;flex:0 0 38px;border-radius:12px;box-shadow:none;background:#513365}
+.main-cards{padding:1px 14px 36px;gap:15px}.panel{border:1px solid #ede8e5;border-radius:25px;box-shadow:0 8px 24px rgba(49,30,41,.045)}.panel.pad{padding:21px 19px}
+.account-outer{margin-inline:-14px;padding:15px;border-radius:28px}.account-outer .account-inner{padding:18px 15px 0;border-radius:23px;border:1px solid #e8e2df;box-shadow:none}
 .section-eyebrow{font-size:10.5px;letter-spacing:.065em;font-weight:700;color:#827b80}
-.account-outer .account-title{font-size:15.5px;font-weight:600;letter-spacing:-.25px;margin:0 0 5px;line-height:1.3}.account-title .icon{color:#373035}
-.account-outer .balance{font:300 40px/1.12 -apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif;letter-spacing:-.7px;font-variant-numeric:proportional-nums;margin:2px 0 2px}.account-outer .balance-label{font-size:13px;font-weight:400;color:#514a50;margin:4px 0 17px;line-height:1.35}
-.account-offer{min-height:123px;border:1px solid #e8e1df;border-radius:15px;background:#fbf9f7}
+.account-outer .account-title{font-size:15px;font-weight:600;letter-spacing:-.2px;margin:0 0 3px;line-height:1.3}.account-title .icon{color:#373035}
+.account-outer .balance{font:300 32px/1.13 -apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif;letter-spacing:-.65px;font-variant-numeric:proportional-nums;margin:2px 0 2px}.account-outer .balance-label{font-size:13px;font-weight:400;color:#514a50;margin:3px 0 12px;line-height:1.35}
+.account-outer .account-offer{min-height:115px;border:1px solid #e8e1df;border-radius:15px;background:#fbf9f7}
 .offer-copy{padding-top:17px}.offer-copy p{font-size:14px;line-height:1.48;font-weight:550;max-width:190px}.offer-copy .link-button{font-size:13px}
 .panel-header h2,.panel h2{font-size:18px;letter-spacing:-.5px;font-weight:750}.link-button{color:#684b8d;font-size:13px;font-weight:720}
 .recent-home .txn-list{margin-top:10px}.txn-title{font-size:14px;font-weight:675}.txn-money{font-size:13px;font-weight:720}.txn-mark{border-radius:14px}.txn-subtitle{font-size:12px}
@@ -71,3 +71,8 @@ body{background:var(--bg);color:var(--ink)}.app-shell{background:var(--bg)}
 .menu-legal{display:flex;align-items:center;justify-content:flex-start;gap:7px;color:#754a9e;background:transparent;border:0;margin:0 18px 10px;font-size:14px;font-weight:700;padding:12px 0;text-align:left}
 @media(min-width:700px){.main-cards{padding-left:20px;padding-right:20px}.greeting{margin-top:42px}}
 @media(max-width:375px){.greeting{font-size:29px}.panel.pad{padding:18px 15px}.deposit-surface{padding-left:15px;padding-right:15px}.deposit-account strong{font-size:18px}.transfer-orb{width:60px;height:60px}.menu-option strong{font-size:15px}.utility-search{max-width:170px}.utility-controls{gap:0}}
+
+/* Compact primary landing composition tuned against iPhone film reference. */
+.home-hero .hero-top{min-height:40px}
+.account-outer .account-offer .offer-copy{padding-top:12px}
+@media(max-width:375px){.greeting{font-size:27px}.account-outer .account-title{font-size:14.5px}.account-outer .balance{font-size:31px}}
