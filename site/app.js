@@ -332,7 +332,19 @@ function securityScreen() {return `<div class="sub-content">
   ${panel(`<div style="display:flex;align-items:center;gap:13px;margin-bottom:13px"><span class="feature-icon">${icon('face','lg')}</span><div><h2>Face ID & passkey</h2><span class="muted small">${getCredential()?'Passkey enrolled on this device':'No passkey enrolled'}</span></div></div><div class="info-block">${icon('shield')} The iPhone handles Face ID and passcode verification. BigBallerBank does not access or store any facial data.</div><button class="secondary-btn" data-action="signoff">Lock the app</button><button class="secondary-btn" data-action="reset-enrollment">Remove local enrollment</button>`,'pad')}
 </div>`;}
 function renderNav() {const items=[['accounts','home','Accounts'],['deposit','deposit','Deposit'],['transfer','transfer','Pay & Transfer'],['explore','compass','Explore'],['menu','menu','Menu']];const active = ['account','notifications','search','security','settings'].includes(state.view) ? (state.view==='account'?'accounts':'menu') : state.view; return `<nav class="footer-nav" aria-label="Main navigation">${items.map(([name,ico,label])=>`<button class="nav-btn ${active===name?'active':''}" data-action="${name}" aria-label="${label}" ${active===name?'aria-current="page"':''}>${icon(ico)}<span>${label}</span></button>`).join('')}</nav>`;}
+function syncDisplayChrome() {
+  const login = !state.unlocked;
+  // A page background alone cannot colour the iPhone Home Screen status bar:
+  // keep root/body and iOS metadata aligned with the currently visible screen.
+  document.documentElement?.classList?.toggle?.('bbb-login', login);
+  document.body?.classList?.toggle?.('bbb-login', login);
+  const theme = $('meta[name="theme-color"]');
+  if (theme) theme.setAttribute('content', login ? '#73819c' : '#f8f5f3');
+  const status = $('meta[name="apple-mobile-web-app-status-bar-style"]');
+  if (status) status.setAttribute('content', login ? 'black-translucent' : 'default');
+}
 function render() {
+  syncDisplayChrome();
   if (!state.unlocked) { app.innerHTML=lockScreen(); const signIn=$('.login-signin');if(signIn)signIn.disabled=!($('#login-username')?.value.trim()&&$('#login-password')?.value); closeSheet(); return; }
   const titles={account:'Account details',deposit:'Deposit',transfer:'Pay & Transfer',explore:'Explore',menu:'Menu',notifications:'Notifications',search:'Ask Baller',security:'Security & Face ID',settings:'Settings'};
   const content = state.view==='accounts' ? homeScreen() : ({account:accountScreen,deposit:depositScreen,transfer:transferScreen,explore:exploreScreen,menu:menuScreen,notifications:notificationsScreen,search:searchScreen,security:securityScreen,settings:settingsScreen}[state.view] || homeScreen)();
