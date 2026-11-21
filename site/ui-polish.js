@@ -83,6 +83,7 @@ state.accountTab = 'overview';
 state.accountTransactionFilter = 'all';
 state.accountTransactionQuery = '';
 state.accountSearchOpen = false;
+state.accountFilterOpen = false;
 
 const existingBankSubHeader = subHeader;
 subHeader = function(title) {
@@ -140,6 +141,7 @@ function bankAccountOverview() {
     </div>
   </div>
   ${state.accountSearchOpen?`<div class="bank-search-box"><input id="bank-transaction-query" autocomplete="off" type="search" aria-label="Search transactions" placeholder="Search transactions" value="${esc(state.accountTransactionQuery)}"></div>`:''}
+  ${state.accountFilterOpen?`<div class="bank-filter-options"><button data-action="bank-filter-all">All transactions</button><button data-action="bank-filter-debits">Money out</button><button data-action="bank-filter-credits">Money in</button></div>`:''}
   ${state.accountTransactionFilter!=='all'?`<div class="bank-active-filter"><span>${state.accountTransactionFilter==='credits'?'Money in':'Money out'}</span><button data-action="bank-filter-clear">Clear filter</button></div>`:''}
   <div class="bank-statement-list" id="bank-statement-results">${bankTransactionList()}</div>
   <div class="bank-statement-bottom"><span id="bank-statement-count">${visibleBankTransactions().length} transactions</span><button data-action="statement">Activity summary ${icon('chevron','xs')}</button></div>`;
@@ -188,15 +190,11 @@ Object.assign(polishedActions, {
   'bank-tab-manage':()=>{state.accountTab='manage';render();},
   'bank-tab-routing':()=>{state.accountTab='routing';render();},
   'bank-search-toggle':()=>{state.accountSearchOpen=!state.accountSearchOpen;if(!state.accountSearchOpen)state.accountTransactionQuery='';render();},
-  'bank-filter':()=>showSheet(`<h2>Filter transactions</h2><p>Show activity by transaction type.</p><div class="bank-filter-options">
-    <button data-action="bank-filter-all">All transactions</button>
-    <button data-action="bank-filter-debits">Money out</button>
-    <button data-action="bank-filter-credits">Money in</button>
-  </div><button class="secondary-btn" data-action="sheet-close">Cancel</button>`),
+  'bank-filter':()=>{state.accountFilterOpen=!state.accountFilterOpen;render();},
   'bank-filter-clear':()=>{state.accountTransactionFilter='all';render();},
-  'bank-filter-all':()=>{state.accountTransactionFilter='all';closeSheet();render();},
-  'bank-filter-debits':()=>{state.accountTransactionFilter='debits';closeSheet();render();},
-  'bank-filter-credits':()=>{state.accountTransactionFilter='credits';closeSheet();render();}
+  'bank-filter-all':()=>{state.accountTransactionFilter='all';state.accountFilterOpen=false;render();},
+  'bank-filter-debits':()=>{state.accountTransactionFilter='debits';state.accountFilterOpen=false;render();},
+  'bank-filter-credits':()=>{state.accountTransactionFilter='credits';state.accountFilterOpen=false;render();}
 });
 app.addEventListener('input',e=>{
   if(e.target.id!=='bank-transaction-query')return;
