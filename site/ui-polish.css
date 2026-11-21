@@ -9,10 +9,10 @@ body{background:var(--bg);color:var(--ink)}.app-shell{background:var(--bg)}
 .search-row{gap:11px}.search-pill{height:53px;border:1px solid #e1dad6;border-radius:30px;font-size:14px;box-shadow:0 1px 2px #30202808;color:#918991}.search-pill .icon{color:#968c91}
 .chat-head{width:52px;height:52px;flex:0 0 52px;border-radius:17px;box-shadow:none;background:#513365}
 .main-cards{padding:14px 14px 36px;gap:17px}.panel{border:1px solid #ede8e5;border-radius:25px;box-shadow:0 8px 24px rgba(49,30,41,.045)}.panel.pad{padding:21px 19px}
-.account-outer{padding:13px;border-radius:28px}.account-inner{padding:21px 17px 16px;border-radius:23px;border:1px solid #e8e2df;box-shadow:none}
-.section-eyebrow{font-size:11px;letter-spacing:.07em;font-weight:750;color:#7d757d}
-.account-title{font-size:19px;font-weight:720;letter-spacing:-.5px;margin:7px 0 8px;line-height:1.32}.account-title .icon{color:#373035}
-.balance{font-size:47px;letter-spacing:-2.4px;font-weight:410;margin:9px 0 0;line-height:1.12}.balance-label{font-size:13px;color:#625b60;margin:10px 0 23px}
+.account-outer{padding:13px;border-radius:28px}.account-inner{padding:20px 17px 16px;border-radius:23px;border:1px solid #e8e2df;box-shadow:none}
+.section-eyebrow{font-size:10.5px;letter-spacing:.065em;font-weight:700;color:#827b80}
+.account-title{font-size:16.5px;font-weight:650;letter-spacing:-.3px;margin:5px 0 5px;line-height:1.3}.account-title .icon{color:#373035}
+.balance{font-size:40px;letter-spacing:-1.65px;font-weight:425;margin:5px 0 2px;line-height:1.14}.balance-label{font-size:13px;color:#625b60;margin:4px 0 19px;line-height:1.35}
 .account-offer{min-height:123px;border:1px solid #e8e1df;border-radius:15px;background:#fbf9f7}
 .offer-copy{padding-top:17px}.offer-copy p{font-size:14px;line-height:1.48;font-weight:550;max-width:190px}.offer-copy .link-button{font-size:13px}
 .panel-header h2,.panel h2{font-size:18px;letter-spacing:-.5px;font-weight:750}.link-button{color:#684b8d;font-size:13px;font-weight:720}
