@@ -1,0 +1,73 @@
+/* BigBallerBank v1.4 — refined iPhone banking UI */
+:root{--ink:#17151a;--muted:#777079;--bg:#f7f4f1;--line:#e9e4e0;--brand:#513668;--brand-dark:#301b40;--shadow:0 8px 26px rgba(46,34,43,.045)}
+body{background:var(--bg);color:var(--ink)}.app-shell{background:var(--bg)}
+.home-hero{background:repeating-linear-gradient(45deg,transparent 0px,transparent 115px,#cbbfc01c 115px,#cbbfc01c 230px),linear-gradient(120deg,#f9f7f5,#eee7e3);padding:calc(env(safe-area-inset-top) + 19px) 17px 29px}
+.hero-top{min-height:40px}.wordmark{font:750 16px/1.1 'Manrope',sans-serif;letter-spacing:-.65px;gap:9px}
+.wordmark .brand-mark{width:33px;height:33px;font-size:22px;border-radius:9px}.hero-tools{gap:7px}
+.mini-icon-btn{width:44px;height:44px;display:grid;place-items:center;position:relative}.signoff{font-size:13px;font-weight:500;white-space:nowrap}
+.greeting{font:440 clamp(30px,7.6vw,37px)/1.17 'DM Sans',-apple-system,sans-serif;letter-spacing:-1.3px;margin:38px 0 28px}
+.search-row{gap:11px}.search-pill{height:53px;border:1px solid #e1dad6;border-radius:30px;font-size:14px;box-shadow:0 1px 2px #30202808;color:#918991}.search-pill .icon{color:#968c91}
+.chat-head{width:52px;height:52px;flex:0 0 52px;border-radius:17px;box-shadow:none;background:#513365}
+.main-cards{padding:14px 14px 36px;gap:17px}.panel{border:1px solid #ede8e5;border-radius:25px;box-shadow:0 8px 24px rgba(49,30,41,.045)}.panel.pad{padding:21px 19px}
+.account-outer{padding:13px;border-radius:28px}.account-inner{padding:21px 17px 16px;border-radius:23px;border:1px solid #e8e2df;box-shadow:none}
+.section-eyebrow{font-size:11px;letter-spacing:.07em;font-weight:750;color:#7d757d}
+.account-title{font-size:19px;font-weight:720;letter-spacing:-.5px;margin:7px 0 8px;line-height:1.32}.account-title .icon{color:#373035}
+.balance{font-size:47px;letter-spacing:-2.4px;font-weight:410;margin:9px 0 0;line-height:1.12}.balance-label{font-size:13px;color:#625b60;margin:10px 0 23px}
+.account-offer{min-height:123px;border:1px solid #e8e1df;border-radius:15px;background:#fbf9f7}
+.offer-copy{padding-top:17px}.offer-copy p{font-size:14px;line-height:1.48;font-weight:550;max-width:190px}.offer-copy .link-button{font-size:13px}
+.panel-header h2,.panel h2{font-size:18px;letter-spacing:-.5px;font-weight:750}.link-button{color:#684b8d;font-size:13px;font-weight:720}
+.recent-home .txn-list{margin-top:10px}.txn-title{font-size:14px;font-weight:675}.txn-money{font-size:13px;font-weight:720}.txn-mark{border-radius:14px}.txn-subtitle{font-size:12px}
+.product-option{font-size:12px;font-weight:500;gap:8px}.product-emoji{display:grid;place-items:center;margin:auto;width:48px;height:48px;border-radius:17px;background:#f5eff5;font-size:25px}
+.feature-panel{min-height:91px;padding:16px 19px;border:1px solid #eee7e3}.feature-copy{line-height:1.43;font-size:14px}
+.footer-nav{border-top:1px solid #e8e4e2;box-shadow:0 -2px 14px #24192a0b;background:#fff;padding:9px 3px calc(8px + env(safe-area-inset-bottom));min-height:calc(70px + env(safe-area-inset-bottom))}
+.nav-btn{color:#776f77;font-size:10px;font-weight:560;gap:4px;min-width:0}.nav-btn .icon{width:25px;height:25px}.nav-btn.active{color:#4b3063;font-weight:750}
+.sub-header{display:block;background:linear-gradient(115deg,#faf8f5,#f0eae7);padding:calc(env(safe-area-inset-top) + 15px) 17px 21px}
+.utility-row{display:flex;gap:12px;align-items:center;justify-content:space-between;min-height:49px}
+.utility-search{height:46px;max-width:192px;min-width:0;display:flex;align-items:center;gap:9px;background:#fff;border:1px solid #e5ddda;border-radius:25px;padding:0 12px;color:#625b62;font-size:13px;box-shadow:0 1px 3px #25152a06}
+.utility-search>span:nth-child(2){white-space:nowrap}.utility-search>.icon:last-child{margin-left:auto;border-left:1px solid #e2dada;padding-left:8px;box-sizing:content-box;color:#5a3970}
+.utility-controls{display:flex;gap:7px;align-items:center}.utility-controls .bubble{right:0;top:1px}.sub-header .signoff{padding:10px 2px}
+.sub-heading-row{margin-top:25px;display:flex;align-items:center;gap:12px;min-height:40px}
+.sub-heading-row h1{font:450 clamp(28px,7.3vw,35px)/1.2 'DM Sans',-apple-system,sans-serif;letter-spacing:-1.0px;margin:0;flex:1}
+.sub-header:not(.top-level) .sub-heading-row h1{font-size:28px;font-weight:620}
+.sub-header .back-btn{flex:0 0 38px;width:38px;height:38px;background:#fff;border:1px solid #e8e1df;border-radius:50%;display:grid;place-items:center}
+.sub-header.top-level .sub-heading-row{margin-top:29px}.sub-header.top-level:has(+ .menu-page) .sub-heading-row{display:none}
+.sub-content{padding:15px 15px 30px;gap:17px}.sub-content .panel.pad{padding:23px 18px}.sub-title{font-weight:650;letter-spacing:-.8px}
+.detail-row{padding:19px 19px;gap:13px}.detail-row b{font-weight:650}.detail-row .square{background:#f3edf5}
+/* Mobile deposit */
+.sub-content.deposit-page{padding:0 0 28px;gap:0;background:#fff}.deposit-info-btn{margin-left:auto}
+.deposit-surface{background:#fff;border-radius:29px 29px 0 0;padding:25px 19px calc(35px + env(safe-area-inset-bottom));min-height:calc(100dvh - 194px);display:flex;flex-direction:column}
+.deposit-account{display:flex;flex-direction:column;gap:8px}.deposit-overline{color:#827b7e;font-size:14px;font-weight:450;display:inline-flex;align-items:center;gap:6px}
+.deposit-account strong{font-size:20px;line-height:1.32;font-weight:590;letter-spacing:-.65px}.deposit-account>span:last-child{color:#81797d;font-size:14px}
+.deposit-amount-zone{margin:55px 0 42px;text-align:center}.deposit-amount-zone>label{display:block;font-size:13px;color:#7e757b;margin-bottom:14px}
+.deposit-amount-field{display:flex;justify-content:center;align-items:center;gap:2px;border-bottom:1px solid #948b8d;padding-bottom:12px;color:#827a7c}
+.deposit-amount-field>span{font-size:42px;font-weight:400;letter-spacing:-1px}
+.deposit-amount-field input{width:160px;max-width:70%;padding:0;background:transparent;border:0;outline:none;text-align:center;color:#2b252a;font:400 48px/1.2 'DM Sans',-apple-system,sans-serif;letter-spacing:-2px;border-radius:0}
+.deposit-amount-field input::placeholder{color:#7c7478;opacity:1}.deposit-amount-zone>p{font-size:12px;color:#847b80;margin:15px 0 0}
+.deposit-photos{margin-bottom:31px}.deposit-photos>.deposit-overline{margin:0 0 10px 3px}.deposit-photo-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.deposit-photo{min-height:111px;border:1px solid #e6dfdd;background:#faf8f7;border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;color:#8e858a;font-size:12px}
+.deposit-photo .photo-symbol{width:48px;height:48px;display:grid;place-items:center;background:#fff;border-radius:50%;color:#9d9499}
+.deposit-photo.captured{background:#f2f7f3;border-color:#9ac1a2;color:#3b7652}.deposit-photo.captured .photo-symbol{color:#3b7652}
+.deposit-availability{font-size:12px;line-height:1.55;color:#514b4f;margin:10px 1px 28px}.deposit-availability button{border:0;background:none;color:#7048a0;text-decoration:underline;padding:0;font-size:inherit}
+.deposit-action-row{display:grid;grid-template-columns:1fr 1fr;gap:13px;margin-top:5px}
+.outline-btn{border:1.5px solid #302930;border-radius:999px;background:#fff;color:#1d1a1d;min-height:54px;font-weight:690;font-size:15px}
+.deposit-action-row .primary-btn{border-radius:999px;min-height:54px;box-shadow:none;font-size:15px}.deposit-action-row .primary-btn:disabled{background:#e9e5e4;color:#b3abac;opacity:1}
+/* Pay and transfer */
+.sub-content.transfer-page{padding:0 0 30px;gap:0;background:var(--bg);min-height:calc(100dvh - 200px)}
+.transfer-surface{border-radius:29px 29px 0 0;background:#fff;padding:35px 13px 31px;min-height:300px}
+.transfer-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));column-gap:4px;row-gap:34px}
+.transfer-tile{border:0;background:transparent;display:flex;align-items:center;flex-direction:column;gap:11px;text-align:center;color:#1d1a1d;font-size:13px;font-weight:480;line-height:1.3;padding:0 2px;min-height:110px}
+.transfer-orb{width:66px;height:66px;display:grid;place-items:center;background:#1f1c22;color:#fff;border-radius:50%;box-shadow:0 5px 13px #21192e0e}.transfer-orb.purple{background:#6839a2}.transfer-orb .icon{width:29px;height:29px}
+.insight-heading{display:flex;align-items:center;gap:8px;font-size:23px;font-weight:420;letter-spacing:-.7px;padding:30px 18px 16px}.insight-info{border:0;background:none;padding:3px;color:#8a8185}
+.forecast-card{display:flex;align-items:center;flex-direction:column;gap:9px;background:#fff;border:1px solid #f2eeeb;border-radius:19px;box-shadow:0 8px 20px #34212d0b;width:200px;margin:0 18px;padding:19px 12px 22px;color:#2d282a;text-align:center}
+.forecast-card>span:first-child{font-size:14px}.forecast-icon{color:#367ab4;background:#eaf4fd;padding:12px;border-radius:18px;margin:6px 0 4px}.forecast-card strong{font-size:12px;font-weight:690}.forecast-card small{font-size:11px;color:#8a8185}
+/* Menu */
+.sub-content.menu-page{padding:4px 0 36px;gap:0}.menu-profile{display:flex;align-items:center;text-align:left;gap:16px;width:100%;border:0;background:transparent;padding:4px 19px 23px;color:var(--ink)}
+.menu-avatar{width:59px;height:59px;flex:0 0 59px;display:grid;place-items:center;background:#a49a9c;color:#fff;border-radius:50%}.menu-avatar .icon{width:36px;height:36px}
+.menu-profile>span:nth-child(2){display:flex;flex-direction:column;flex:1;gap:2px;min-width:0}.menu-profile strong{font-size:26px;font-weight:450;letter-spacing:-.6px}.menu-profile small{font-size:15px;color:#514a50}.menu-profile>.icon:last-child{color:#51494e}
+.menu-surface{background:#fff;border-radius:27px 27px 0 0;padding:26px 15px 26px}
+.menu-option{width:100%;display:flex;align-items:center;justify-content:space-between;text-align:left;gap:12px;min-height:73px;border:0;border-bottom:1px solid #e7e2df;background:#fff;padding:15px 14px;color:#252026}
+.menu-option:last-child{border:0}.menu-option>span:first-child{flex:1;display:flex;flex-direction:column;gap:4px}.menu-option strong{font-size:16px;line-height:1.3;font-weight:590}.menu-option small{color:#827a7e;font-size:12px}.menu-option>.icon{color:#4c4549}
+.menu-feedback{display:block;align-self:center;margin:36px 0 27px;border:1.5px solid #40373c;background:#fff;border-radius:999px;min-height:45px;padding:0 23px;font-size:15px;font-weight:660;color:#302a2e}
+.menu-legal{display:flex;align-items:center;justify-content:flex-start;gap:7px;color:#754a9e;background:transparent;border:0;margin:0 18px 10px;font-size:14px;font-weight:700;padding:12px 0;text-align:left}
+@media(min-width:700px){.main-cards{padding-left:20px;padding-right:20px}.greeting{margin-top:42px}}
+@media(max-width:375px){.greeting{font-size:29px}.panel.pad{padding:18px 15px}.deposit-surface{padding-left:15px;padding-right:15px}.deposit-account strong{font-size:18px}.transfer-orb{width:60px;height:60px}.menu-option strong{font-size:15px}.utility-search{max-width:170px}.utility-controls{gap:0}}
