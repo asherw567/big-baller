@@ -18,6 +18,23 @@ export async function checkProject() {
   });
   const body = await response.json().catch(() => ({}));
   if (!response.ok) {
+    // Read-only diagnostics: expose only allowlisted status words, never token IDs or raw bodies.
+    if (response.status === 401 || response.status === 403) {
+      for (const [kind, path] of [['user', 'user/tokens/verify'], ['account', `accounts/${account}/tokens/verify`]]) {
+        try {
+          const verification = await fetch(`https://api.cloudflare.com/client/v4/${path}`, {
+            headers: { Authorization: `Bearer ${token}` }, signal: AbortSignal.timeout(15000)
+          });
+          const data = await verification.json().catch(() => ({}));
+          const status = ['active', 'disabled', 'expired'].includes(data.result?.status) ? data.result.status : 'not-verified';
+          console.log(`Token verification (${kind}): HTTP ${verification.status}, status ${status}`);
+          if (verification.ok && data.success && status === 'active') {
+            console.log('Token is active; check Pages permission and owning account scope against repository account ID.');
+            break;
+          }
+        } catch { console.log(`Token verification (${kind}): unavailable`); }
+      }
+    }
     const codes = (Array.isArray(body.errors) ? body.errors : []).map(error => error.code).filter(Number.isInteger).slice(0, 5);
     throw new Error(`Unable to read existing Cloudflare project (HTTP ${response.status}; Cloudflare codes: ${codes.join(',') || 'none'}).`);
   }
