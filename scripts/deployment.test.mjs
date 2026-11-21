@@ -12,7 +12,10 @@ test('deploy only to the existing hostname and production branch', () => {
 });
 test('build contains real hashed assets, a version, and syntactically valid scripts', async () => {
   const index = await read('dist/index.html');
-  for (const match of index.matchAll(/(?:src|href)="([^"]+)"/g)) await access(new URL(`../dist/${match[1]}`, import.meta.url));
+  for (const match of index.matchAll(/(?:src|href)="([^"]+)"/g)) {
+    if (/^https?:\/\//.test(match[1])) continue; // Approved external logo artwork is not a bundled asset.
+    await access(new URL(`../dist/${match[1]}`, import.meta.url));
+  }
   assert.match(index, /app\.[a-f0-9]{16}\.js/);
   assert.match(index, /styles\.[a-f0-9]{16}\.css/);
   assert.match(JSON.parse(await read('dist/version.json')).version, /^[a-f0-9]{20}$/);
