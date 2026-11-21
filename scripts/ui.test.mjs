@@ -17,11 +17,11 @@ test('mobile UI preserves balance, transactions and working navigation',async()=
   vm.runInContext(await read('ui-polish.js'),context,{filename:'ui-polish.js'});
   const js=code=>vm.runInContext(code,context);
   assert.match(js('subHeader("Deposit")'),/Need help/);
-  assert.ok(js('depositScreen()').includes('Available balance $0.00'));
+  assert.ok(js('depositScreen()').includes('Available balance $88,362.21'));
   assert.match(js('transferScreen()'),/Send money/);
   assert.match(js('menuScreen()'),/Security Center/);
   js('state.unlocked=true;state.view="accounts";render()');
-  assert.ok(app.innerHTML.includes('$0.00'));
+  assert.ok(app.innerHTML.includes('$88,362.21'));
   assert.ok(app.innerHTML.includes('Everyday Checking ••••8787'));
   assert.ok(!app.innerHTML.includes('section-eyebrow">Your accounts'));
   assert.match(app.innerHTML, /<button class="account-title"[^>]*aria-label="View Everyday Checking account ending in 8787"/);
@@ -46,6 +46,12 @@ test('mobile UI preserves balance, transactions and working navigation',async()=
   assert.match(app.innerHTML,/id="deposit-submit"[^>]*>Deposit/);
   assert.doesNotMatch(app.innerHTML,/id="deposit-submit"[^>]*disabled/);
   assert.equal(js('TRANSACTIONS.reduce((sum,t)=>sum+t.amount,0)'),0);
+  assert.equal(js('SCENE_BALANCE_CENTS'),8836221);
+  assert.equal(js('ledger[0].runningBalance'),8836221);
+  assert.ok(js('transferFormSheet.toString()').includes('SCENE_BALANCE_CENTS'));
+  assert.ok(js('statementSheet.toString()').includes('SCENE_BALANCE_CENTS'));
+  assert.ok(js('accountScreen()').includes('$88,362.21'));
+  assert.ok(js('depositScreen()').includes('$88,362.21'));
 });
 
 test('iPhone login paints behind safe areas without changing banking chrome', async () => {
