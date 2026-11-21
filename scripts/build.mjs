@@ -7,7 +7,7 @@ await rm(at('dist/'), { recursive: true, force: true });
 await mkdir(at('dist/'), { recursive: true });
 await cp(at('site/'), at('dist/'), { recursive: true });
 let index = await readFile(at('site/index.html'), 'utf8');
-for (const name of ['app.js', 'styles.css']) {
+for (const name of ['app.js', 'styles.css', 'ui-polish.js', 'ui-polish.css']) {
   const data = await readFile(at(`site/${name}`));
   const target = name.replace('.', `.${hash(data)}.`);
   await writeFile(at(`dist/${target}`), data);
