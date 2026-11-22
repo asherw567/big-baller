@@ -100,3 +100,20 @@ test('iPhone login paints behind safe areas without changing banking chrome', as
   assert.ok(css.includes("body.bbb-login .login-photo::after {"));
   assert.ok(css.includes("rgba(86,101,143,.68)"));
 });
+
+test('Wells Fargo film version preserves fictional state and cast-only sign-in', async () => {
+  const appjs=await read('app.js');
+  const ui=await read('ui-polish.js');
+  const html=await read('index.html');
+  const css=await read('ui-polish.css');
+  const manifest=JSON.parse(await read('manifest.webmanifest'));
+  assert.match(appjs, /Wells Fargo/);
+  assert.match(appjs, /cast' \|\| password!=='scene'/);
+  assert.match(appjs, /const SCENE_BALANCE_CENTS = 8836221/);
+  assert.match(appjs, /film prop/);
+  assert.ok(!appjs.includes('BigBallerBank'));
+  assert.ok(!ui.includes('BigBallerBank'));
+  assert.ok(html.includes('wellsfargo.com/assets/images/logos/wellsfargo/logo_974x1050.png'));
+  assert.ok(css.includes('--brand:#D71E28'));
+  assert.equal(manifest.name,'Wells Fargo');
+});

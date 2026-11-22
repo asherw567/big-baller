@@ -1,5 +1,5 @@
-/* BigBallerBank v1.4 — refined iPhone banking UI */
-:root{--ink:#17151a;--muted:#777079;--bg:#f7f4f1;--line:#e9e4e0;--brand:#513668;--brand-dark:#301b40;--shadow:0 8px 26px rgba(46,34,43,.045)}
+/* Wells Fargo v1.4 — refined iPhone banking UI */
+:root{--ink:#17151a;--muted:#777079;--bg:#f7f4f1;--line:#e9e4e0;--brand:#D71E28;--brand-dark:#AE1820;--gold:#FFCD41;--shadow:0 8px 26px rgba(46,34,43,.045)}
 body{background:var(--bg);color:var(--ink)}.app-shell{background:var(--bg)}
 .home-hero{background:repeating-linear-gradient(45deg,transparent 0px,transparent 115px,#cbbfc01c 115px,#cbbfc01c 230px),linear-gradient(120deg,#f9f7f5,#eee7e3);padding:calc(env(safe-area-inset-top) + 19px) 17px 15px}
 .hero-top{min-height:40px}.wordmark{font:750 16px/1.1 'Manrope',sans-serif;letter-spacing:-.65px;gap:9px}
@@ -272,3 +272,24 @@ body.bbb-login .login-photo::after {
   .bank-statement-merchant{font-size:13px}
   .bank-statement-amount strong{font-size:14px}
 }
+
+/* Wells Fargo-branded production draft; the published app remains the fictional bank. */
+.wf-brand-mark{width:34px;height:37px;display:block;object-fit:contain;flex:0 0 34px}
+.wf-login-mark{width:76px;height:82px;display:block;object-fit:contain}
+.login-brandbar{min-height:82px}
+.wordmark{font-size:16px;font-weight:750;letter-spacing:-.45px}
+.login-signin:not(:disabled){background:#D71E28}
+.login-save input:checked{background:#D71E28;border-color:#D71E28}
+.login-textlink:active{color:#D71E28}
+.login-promo .promo-icon{background:#FFCD41;color:#251c1e}
+.chat-head,.transfer-orb.purple{background:#D71E28}
+.account-outer .account-offer{background:#fafafa}
+.offer-art{background:linear-gradient(130deg,#e7dbdc,#cb9399 65%,#a83f45)}
+.mini-bank-card{background:linear-gradient(130deg,#d71e28,#9c1924);color:#fff}
+.mini-bank-card small{color:#FFCD41}
+.fake-card{background:linear-gradient(130deg,#d71e28,#8f1820);color:#fff}
+.bank-info-link,.link-button,.menu-legal{color:#c41b24}
+.bank-account-tabs button.active{border-bottom-color:#d71e28}
+.footer-nav .nav-btn.active,.nav-btn.active{color:#d71e28}
+.bank-filter-options button{color:#b41f27}
+@media(max-width:375px){.wf-login-mark{width:64px;height:70px}.login-brandbar{min-height:70px}}

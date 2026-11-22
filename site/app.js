@@ -1,4 +1,4 @@
-/* BigBallerBank — film-prop web app. Absolutely no real financial accounts or money movement. */
+/* Wells Fargo — film-prop web app. Absolutely no real financial accounts or money movement. */
 'use strict';
 const $ = (s, r = document) => r.querySelector(s);
 const app = $('#app');
@@ -51,10 +51,10 @@ const icons = {
   refresh:'<path d="M20 7V3h-4M4 17v4h4M4 10a8 8 0 0 1 14-5l2 2M20 14A8 8 0 0 1 6 19l-2-2"/>'
 };
 function icon(name, cls = '') { return `<span class="icon ${cls}" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">${icons[name] || icons.info}</svg></span>`; }
-function brand(extra = '') { return `<span class="brand-mark ${extra}">B<span>3</span></span>`; }
+function brand(extra = '') { return `<img class="wf-brand-mark ${extra}" src="https://www.wellsfargo.com/assets/images/logos/wellsfargo/logo_974x1050.png" alt="Wells Fargo" />`; }
 function goodTime() { const h = new Date().getHours(); return h < 12 ? 'Good morning' : h < 17 ? 'Good afternoon' : 'Good evening'; }
 function toast(message) { const el = $('#toast'); el.className = 'toast-message'; el.textContent = message; requestAnimationFrame(() => el.classList.add('show')); clearTimeout(toast.timer); toast.timer = setTimeout(() => el.classList.remove('show'), 3300); }
-function supportLabel() { return 'Need help? Ask Baller'; }
+function supportLabel() { return 'Need help? Ask Fargo'; }
 function showSheet(html) { state.sheet = html; renderSheet(); }
 function closeSheet() { state.sheet = null; const back = $('#sheet-backdrop'); if (back) back.remove(); }
 function renderSheet() { const old = $('#sheet-backdrop'); if (old) old.remove(); if (!state.sheet) return; const d = document.createElement('div'); d.className = 'sheet-backdrop'; d.id = 'sheet-backdrop'; d.innerHTML = `<div class="sheet" role="dialog" aria-modal="true"><div class="sheet-grab"></div><button class="sheet-close" data-action="sheet-close" aria-label="Close">${icon('x','sm')}</button>${state.sheet}</div>`; d.addEventListener('click', e => { if (e.target === d) closeSheet(); }); document.body.append(d); }
@@ -102,8 +102,8 @@ async function enrollPasskey() {
   try {
     const credential = await navigator.credentials.create({ publicKey: {
       challenge,
-      rp: { name: 'BigBallerBank', id: location.hostname },
-      user: { id: randomBytes(16), name: 'BigBallerBank Cast', displayName: 'BigBallerBank Cast' },
+      rp: { name: 'Wells Fargo', id: location.hostname },
+      user: { id: randomBytes(16), name: 'Wells Fargo Cast', displayName: 'Wells Fargo Cast' },
       pubKeyCredParams: [{ type:'public-key', alg:-7 }],
       authenticatorSelection: { authenticatorAttachment:'platform', residentKey:'preferred', userVerification:'required' },
       attestation:'none', timeout:60000
@@ -145,7 +145,7 @@ function lockScreen() {
   return `<div class="login-page">
     <div class="login-photo" aria-hidden="true"></div>
     <div class="login-main">
-      <header class="login-brandbar"><span class="login-wordmark">BIG BALLER<span class="login-wordmark-small">BANK</span></span><button class="login-location" aria-label="Locations" data-action="locations">${icon('compass','lg')}</button></header>
+      <header class="login-brandbar"><img class="wf-login-mark" src="https://www.wellsfargo.com/assets/images/logos/wellsfargo/logo_974x1050.png" alt="Wells Fargo" /><button class="login-location" aria-label="Locations" data-action="locations">${icon('compass','lg')}</button></header>
       <h1 class="login-greeting">${goodTime()}</h1>
       <div class="login-bottom">
         <section class="login-card">
@@ -165,7 +165,7 @@ function lockScreen() {
         </section>
         <div class="login-promo-grid">
           <button class="login-promo" data-action="product-checking"><span class="promo-icon">${icon('compass','md')}</span><b>Explore our products</b><span>Find your fit ${icon('chevron','sm')}</span></button>
-          <button class="login-promo" data-action="offer"><span class="promo-icon">${icon('card','md')}</span><b>Introducing the BigBaller Black Card</b><span>Learn more ${icon('chevron','sm')}</span></button>
+          <button class="login-promo" data-action="offer"><span class="promo-icon">${icon('card','md')}</span><b>Introducing the Wells Fargo Active Cash Card</b><span>Learn more ${icon('chevron','sm')}</span></button>
         </div>
       </div>
     </div>
@@ -174,7 +174,7 @@ function lockScreen() {
 const products = {
   checking: {title:'Checking accounts',emoji:'💳',detail:'A checking account designed around everyday spending.'},
   savings: {title:'Savings & CDs',emoji:'🪙',detail:'Explore savings goals, savings accounts, and certificates of deposit.'},
-  credit: {title:'Credit cards',emoji:'💎',detail:'Discover the BigBaller Black Card, designed for everyday perks.'},
+  credit: {title:'Credit cards',emoji:'💎',detail:'Discover the Wells Fargo Active Cash Card, designed for everyday perks.'},
   home: {title:'Mortgages & loans',emoji:'🏡',detail:'Explore home and personal lending products.'}
 };
 /* Fictional two-week transaction ledger. All amounts are integer cents and all
@@ -269,15 +269,15 @@ function statementSheet() {
 function homeScreen() {
   const offerVisible = sessionStorage.getItem(STORE.offer) !== 'yes';
   return `<section class="home-hero">
-    <div class="hero-top"><span class="wordmark">${brand()}BigBallerBank</span><div class="hero-tools">
+    <div class="hero-top"><span class="wordmark">${brand()}Wells Fargo</span><div class="hero-tools">
       <button class="mini-icon-btn" data-action="notifications" aria-label="Notifications">${icon('bell','lg')}${!state.notificationsRead?'<span class="bubble">8</span>':''}</button>
       <button class="signoff" data-action="signoff">Sign off</button></div></div>
     <h1 class="greeting">${goodTime()}, ${esc(getName())}</h1>
-    <div class="search-row"><button class="search-pill" data-action="search">${icon('search','sm')}<span>${supportLabel()}</span></button><button class="chat-head" data-action="chat" aria-label="Ask Baller assistant">${icon('chat','lg')}<span class="bubble">2</span></button></div>
+    <div class="search-row"><button class="search-pill" data-action="search">${icon('search','sm')}<span>${supportLabel()}</span></button><button class="chat-head" data-action="chat" aria-label="Ask Fargo assistant">${icon('chat','lg')}<span class="bubble">2</span></button></div>
   </section>
   <main class="main-cards">
     <section class="panel account-outer"><div class="account-inner"><button class="account-title" data-action="account" aria-label="View Everyday Checking account ending in 8787">Everyday Checking ••••8787</button><div class="balance">${money(SCENE_BALANCE_CENTS)}</div><div class="balance-label">Available balance</div>
-      ${offerVisible ? `<div class="account-offer"><div class="offer-art"><div class="mini-bank-card"><b>BigBallerBank</b><small>BLACK</small></div></div><div class="offer-copy"><button class="offer-dismiss" data-action="dismiss-offer" aria-label="Dismiss offer">${icon('x','sm')}</button><p>Introducing the BigBaller Black Card.</p><button class="link-button" data-action="offer">Learn more ${icon('chevron','sm')}</button></div></div>` : `<button class="link-button" data-action="account">View account details ${icon('chevron','sm')}</button>`}
+      ${offerVisible ? `<div class="account-offer"><div class="offer-art"><div class="mini-bank-card"><b>Wells Fargo</b><small>ACTIVE CASH</small></div></div><div class="offer-copy"><button class="offer-dismiss" data-action="dismiss-offer" aria-label="Dismiss offer">${icon('x','sm')}</button><p>Introducing the Wells Fargo Active Cash Card.</p><button class="link-button" data-action="offer">Learn more ${icon('chevron','sm')}</button></div></div>` : `<button class="link-button" data-action="account">View account details ${icon('chevron','sm')}</button>`}
       </div></section>
     <section class="panel pad"><div class="panel-header"><h2>Open an account</h2><button class="link-button" data-action="explore">Explore all ${icon('chevron','sm')}</button></div><div class="product-grid">
       <button class="product-option" data-action="product-checking"><span class="product-emoji">💳</span><span>Checking</span></button>
@@ -288,8 +288,8 @@ function homeScreen() {
     <button class="panel feature-panel" data-action="credit-score"><span class="feature-icon">${icon('pie','lg')}</span><span class="feature-copy">Monitor your <b>credit score and report</b> with BallerScore<span style="font-size:10px;vertical-align:super">™</span></span>${icon('chevron','sm')}</button>
     <button class="panel feature-panel accent-warm" data-action="financial-goals"><span class="feature-icon">${icon('wallet','lg')}</span><span class="feature-copy"><b>Take charge of your financial goals.</b> Build a personalized savings plan.</span>${icon('chevron','sm')}</button>
     <section class="panel pad recent-home"><div class="panel-header"><h2>Recent transactions</h2><button class="link-button" data-action="account">See all ${icon('chevron','sm')}</button></div><div class="txn-list">${ledger.slice(0,3).map(t=>transactionRow(t,true)).join('')}</div><button class="txn-view-all" data-action="account">View all transactions ${icon('chevron','xs')}</button></section>
-    <button class="panel feature-panel accent-blue" data-action="rewards"><span class="feature-icon">${icon('gift','lg')}</span><span class="feature-copy"><b>BigBaller Rewards</b> Discover something extraordinary.</span>${icon('chevron','sm')}</button>
-    <section class="panel rewards-panel"><div class="panel-header"><h2>Your BigBaller Deals</h2><button class="link-button" data-action="rewards">View all ${icon('chevron','sm')}</button></div><p class="small-print">Exclusive experiences and rewards, made for you.</p><div class="reward-chips"><span class="chip">✦ Lifestyle</span><span class="chip">✦ Travel</span><span class="chip">✦ Dining</span></div></section>
+    <button class="panel feature-panel accent-blue" data-action="rewards"><span class="feature-icon">${icon('gift','lg')}</span><span class="feature-copy"><b>Wells Fargo Rewards</b> Discover something extraordinary.</span>${icon('chevron','sm')}</button>
+    <section class="panel rewards-panel"><div class="panel-header"><h2>Your Wells Fargo Deals</h2><button class="link-button" data-action="rewards">View all ${icon('chevron','sm')}</button></div><p class="small-print">Exclusive experiences and rewards, made for you.</p><div class="reward-chips"><span class="chip">✦ Lifestyle</span><span class="chip">✦ Travel</span><span class="chip">✦ Dining</span></div></section>
   </main>`;
 }
 function subHeader(title) { return `<header class="sub-header"><button class="back-btn" data-action="back" aria-label="Back">${icon('left','md')}</button><h1>${esc(title)}</h1><button class="mini-icon-btn" data-action="notifications" aria-label="Notifications">${icon('bell','md')}</button></header>`; }
@@ -308,30 +308,30 @@ function depositScreen() {return `<div class="sub-content">
 </div>`;}
 function transferScreen() {return `<div class="sub-content">
   <h2 class="sub-title">Move money</h2>
-  ${panel(`<form id="transfer-form"><div class="form-group"><label class="form-label" for="from-account">From account</label><select class="form-control" id="from-account"><option>Everyday Checking ••••8787 — ${money(SCENE_BALANCE_CENTS)}</option></select></div><div class="form-group"><label class="form-label" for="to-account">To account</label><select class="form-control" id="to-account"><option value="savings">BigBaller Savings ••••2204</option><option value="external">External account</option></select></div><div class="form-group"><label class="form-label" for="transfer-amount">Transfer amount</label><input class="form-control" id="transfer-amount" inputmode="decimal" autocomplete="off" type="number" min="0.01" step="0.01" placeholder="$0.00" required/><div class="form-help">Available to transfer: ${money(SCENE_BALANCE_CENTS)}</div></div><div class="form-group"><label class="form-label">Transfer date</label><div class="form-control" style="background:#f9f7f8">Today</div></div><button type="submit" class="primary-btn">Review transfer</button></form>`,'pad')}
+  ${panel(`<form id="transfer-form"><div class="form-group"><label class="form-label" for="from-account">From account</label><select class="form-control" id="from-account"><option>Everyday Checking ••••8787 — ${money(SCENE_BALANCE_CENTS)}</option></select></div><div class="form-group"><label class="form-label" for="to-account">To account</label><select class="form-control" id="to-account"><option value="savings">Wells Fargo Savings ••••2204</option><option value="external">External account</option></select></div><div class="form-group"><label class="form-label" for="transfer-amount">Transfer amount</label><input class="form-control" id="transfer-amount" inputmode="decimal" autocomplete="off" type="number" min="0.01" step="0.01" placeholder="$0.00" required/><div class="form-help">Available to transfer: ${money(SCENE_BALANCE_CENTS)}</div></div><div class="form-group"><label class="form-label">Transfer date</label><div class="form-control" style="background:#f9f7f8">Today</div></div><button type="submit" class="primary-btn">Review transfer</button></form>`,'pad')}
   <div class="info-block">${icon('info')} Your available balance is currently ${money(SCENE_BALANCE_CENTS)}.</div></div>`;}
-function exploreScreen() {return `<div class="sub-content"><div><span class="section-eyebrow">For what's next</span><h2 class="sub-title">Discover more with BigBallerBank.</h2></div>
+function exploreScreen() {return `<div class="sub-content"><div><span class="section-eyebrow">For what's next</span><h2 class="sub-title">Discover more with Wells Fargo.</h2></div>
  ${panel(`<div class="product-banner"><div class="glyph">💳</div><div><h3>Checking that fits your life</h3><p>Explore everyday banking.</p></div></div>${detailRow('wallet','Checking accounts','Your money, your way','product-checking')+detailRow('pie','Savings & CDs','Plan for your future','product-savings')+detailRow('card','Credit cards','For the moments that matter','product-credit')+detailRow('home','Mortgages & loans','Find your next chapter','product-home')}`)}
- ${panel(`<div class="panel-header"><h2>BigBaller Rewards</h2><span class="pill-promo">Exclusive</span></div><p class="muted small">Lifestyle, travel, and experiences, selected for you.</p><button class="link-button" data-action="rewards">View rewards ${icon('chevron','sm')}</button>`,'pad')}</div>`;}
+ ${panel(`<div class="panel-header"><h2>Wells Fargo Rewards</h2><span class="pill-promo">Exclusive</span></div><p class="muted small">Lifestyle, travel, and experiences, selected for you.</p><button class="link-button" data-action="rewards">View rewards ${icon('chevron','sm')}</button>`,'pad')}</div>`;}
 function menuScreen() {return `<div class="sub-content">
-  ${panel(`<div class="row"><div style="display:flex;gap:13px;align-items:center"><div class="feature-icon">${icon('user','lg')}</div><div><h2>${esc(getName())}</h2><span class="muted small">BigBallerBank customer</span></div></div><button class="link-button" data-action="edit-name">Edit</button></div>`,'pad')}
-  ${panel(detailRow('user','Profile & preferences','Change the display name','edit-name')+detailRow('card','My cards','View your debit card','debit-card')+detailRow('shield','Security & Face ID','Manage the passkey on this phone','security')+detailRow('bell','Notifications','View recent messages','notifications')+detailRow('help','Help & support','Ask Baller','chat'))}
+  ${panel(`<div class="row"><div style="display:flex;gap:13px;align-items:center"><div class="feature-icon">${icon('user','lg')}</div><div><h2>${esc(getName())}</h2><span class="muted small">Wells Fargo customer</span></div></div><button class="link-button" data-action="edit-name">Edit</button></div>`,'pad')}
+  ${panel(detailRow('user','Profile & preferences','Change the display name','edit-name')+detailRow('card','My cards','View your debit card','debit-card')+detailRow('shield','Security & Face ID','Manage the passkey on this phone','security')+detailRow('bell','Notifications','View recent messages','notifications')+detailRow('help','Help & support','Ask Fargo','chat'))}
   ${panel(detailRow('settings','Settings','Preferences, security & app information','settings')+detailRow('logout','Sign off','Lock the application','signoff'))}
-  <div class="text-center muted small" style="padding-top:8px">BigBallerBank · v1.3</div></div>`;}
+  <div class="text-center muted small" style="padding-top:8px">Wells Fargo · v1.3</div></div>`;}
 function settingsScreen() {return `<div class="sub-content">
-  ${panel(detailRow('shield','Sign-in & security','Face ID and passkeys','security')+detailRow('user','Account preferences','Display name and profile','edit-name')+detailRow('info','About BigBallerBank','App information and disclosures','about'))}
-  <div class="text-center muted small" style="padding-top:8px">BigBallerBank · Version 1.3</div>
+  ${panel(detailRow('shield','Sign-in & security','Face ID and passkeys','security')+detailRow('user','Account preferences','Display name and profile','edit-name')+detailRow('info','About Wells Fargo','App information and disclosures','about'))}
+  <div class="text-center muted small" style="padding-top:8px">Wells Fargo · Version 1.3</div>
 </div>`;}
 function notificationsScreen() {return `<div class="sub-content"><span class="section-eyebrow">Your messages</span>
-  ${panel(detailRow('shield','Security update','Passkey authentication is available','message-security')+detailRow('gift','Welcome to BigBallerBank','Your account is ready','message-welcome')+detailRow('wallet','Account activity','27 posted transactions over the last 14 days','account')+detailRow('card','Your card dashboard','Explore your debit card','debit-card')+detailRow('pie','Meet BallerScore™','View the credit-score feature','credit-score')+detailRow('gift','BigBaller Rewards','Explore exclusive offers','rewards')+detailRow('info','Your account overview','Your available balance is ' + money(SCENE_BALANCE_CENTS),'account')+detailRow('help','Need some help?','Ask Baller is here for you','chat'))}
+  ${panel(detailRow('shield','Security update','Passkey authentication is available','message-security')+detailRow('gift','Welcome to Wells Fargo','Your account is ready','message-welcome')+detailRow('wallet','Account activity','27 posted transactions over the last 14 days','account')+detailRow('card','Your card dashboard','Explore your debit card','debit-card')+detailRow('pie','Meet BallerScore™','View the credit-score feature','credit-score')+detailRow('gift','Wells Fargo Rewards','Explore exclusive offers','rewards')+detailRow('info','Your account overview','Your available balance is ' + money(SCENE_BALANCE_CENTS),'account')+detailRow('help','Need some help?','Ask Fargo is here for you','chat'))}
   <button class="secondary-btn" style="margin-top:0" data-action="clear-notifications">Mark all as read</button></div>`;}
 function searchScreen() {return `<div class="sub-content">
   ${panel(`<label class="form-label" for="help-search">How can we help?</label><input class="form-control" id="help-search" value="${esc(state.searchTerm)}" placeholder="Search accounts, payments, cards…" autocomplete="off" /><div class="search-suggest"><button data-action="search-account">Account balance</button><button data-action="search-face">Face ID</button><button data-action="search-transfer">Transfers</button><button data-action="search-card">Card details</button></div>`,'pad')}
   <h2 class="sub-title">Popular questions</h2>
-  ${panel(detailRow('wallet','Where is my balance?','Checking account balance','account')+detailRow('shield','How do I sign in?','Biometrics & passkeys','security')+detailRow('transfer','How can I transfer money?','Explore the simulation','transfer')+detailRow('help','Talk to the assistant','Ask Baller','chat'))}
+  ${panel(detailRow('wallet','Where is my balance?','Checking account balance','account')+detailRow('shield','How do I sign in?','Biometrics & passkeys','security')+detailRow('transfer','How can I transfer money?','Explore the simulation','transfer')+detailRow('help','Talk to the assistant','Ask Fargo','chat'))}
   </div>`;}
 function securityScreen() {return `<div class="sub-content">
-  ${panel(`<div style="display:flex;align-items:center;gap:13px;margin-bottom:13px"><span class="feature-icon">${icon('face','lg')}</span><div><h2>Face ID & passkey</h2><span class="muted small">${getCredential()?'Passkey enrolled on this device':'No passkey enrolled'}</span></div></div><div class="info-block">${icon('shield')} The iPhone handles Face ID and passcode verification. BigBallerBank does not access or store any facial data.</div><button class="secondary-btn" data-action="signoff">Lock the app</button><button class="secondary-btn" data-action="reset-enrollment">Remove local enrollment</button>`,'pad')}
+  ${panel(`<div style="display:flex;align-items:center;gap:13px;margin-bottom:13px"><span class="feature-icon">${icon('face','lg')}</span><div><h2>Face ID & passkey</h2><span class="muted small">${getCredential()?'Passkey enrolled on this device':'No passkey enrolled'}</span></div></div><div class="info-block">${icon('shield')} The iPhone handles Face ID and passcode verification. Wells Fargo does not access or store any facial data.</div><button class="secondary-btn" data-action="signoff">Lock the app</button><button class="secondary-btn" data-action="reset-enrollment">Remove local enrollment</button>`,'pad')}
 </div>`;}
 function renderNav() {const items=[['accounts','home','Accounts'],['deposit','deposit','Deposit'],['transfer','transfer','Pay & Transfer'],['explore','compass','Explore'],['menu','menu','Menu']];const active = ['account','notifications','search','security','settings'].includes(state.view) ? (state.view==='account'?'accounts':'menu') : state.view; return `<nav class="footer-nav" aria-label="Main navigation">${items.map(([name,ico,label])=>`<button class="nav-btn ${active===name?'active':''}" data-action="${name}" aria-label="${label}" ${active===name?'aria-current="page"':''}>${icon(ico)}<span>${label}</span></button>`).join('')}</nav>`;}
 function syncDisplayChrome() {
@@ -348,20 +348,20 @@ function syncDisplayChrome() {
 function render() {
   syncDisplayChrome();
   if (!state.unlocked) { app.innerHTML=lockScreen(); const signIn=$('.login-signin');if(signIn)signIn.disabled=!($('#login-username')?.value.trim()&&$('#login-password')?.value); closeSheet(); return; }
-  const titles={account:'Account details',deposit:'Deposit',transfer:'Pay & Transfer',explore:'Explore',menu:'Menu',notifications:'Notifications',search:'Ask Baller',security:'Security & Face ID',settings:'Settings'};
+  const titles={account:'Account details',deposit:'Deposit',transfer:'Pay & Transfer',explore:'Explore',menu:'Menu',notifications:'Notifications',search:'Ask Fargo',security:'Security & Face ID',settings:'Settings'};
   const content = state.view==='accounts' ? homeScreen() : ({account:accountScreen,deposit:depositScreen,transfer:transferScreen,explore:exploreScreen,menu:menuScreen,notifications:notificationsScreen,search:searchScreen,security:securityScreen,settings:settingsScreen}[state.view] || homeScreen)();
-  app.innerHTML=`<div class="app-shell">${state.view==='accounts'?'':subHeader(titles[state.view]||'BigBallerBank')}${content}${renderNav()}</div>`;
+  app.innerHTML=`<div class="app-shell">${state.view==='accounts'?'':subHeader(titles[state.view]||'Wells Fargo')}${content}${renderNav()}</div>`;
   renderSheet();
 }
 function navigate(view) {if (!state.unlocked) return; closeSheet(); state.view=view; render(); window.scrollTo({top:0,behavior:'instant'});}
 function editName() {showSheet(`<h2>Personalize your screen</h2><p>Enter the name you want to see on your account dashboard.</p><form id="profile-form"><div class="form-group"><label class="form-label" for="profile-name">Display name</label><input class="form-control" id="profile-name" type="text" maxlength="36" value="${esc(getName())}" required></div><button class="primary-btn" type="submit">Save name</button></form>`);}
-function debitCard() {showSheet(`<h2>Your debit card</h2><p>View your everyday debit card.</p><div class="fake-card"><div class="row"><strong>BigBallerBank</strong><span>✦</span></div><p>EVERYDAY CHECKING</p><div class="fake-card-number">•••• •••• •••• 8787</div><div class="row"><span>${esc(getName()).toUpperCase()}</span><b>BLACK</b></div></div><button class="primary-btn" data-action="sheet-close">Done</button>`);}
-function assistantSheet() {showSheet(`<div class="row" style="justify-content:flex-start;margin-bottom:15px"><span class="feature-icon">${icon('chat','lg')}</span><div><h2 style="margin:0">Ask Baller</h2><span class="muted small">Your virtual banking assistant</span></div></div><div class="screen-simulation"><h3>Hi, ${esc(getName())}!</h3><p>Welcome to BigBallerBank. Your Everyday Checking balance is <strong>${money(SCENE_BALANCE_CENTS)}</strong>. What would you like to explore?</p></div><div class="search-suggest"><button data-action="account">View my balance</button><button data-action="transfer">Make a transfer</button><button data-action="security">Face ID settings</button></div><button class="secondary-btn" data-action="sheet-close">Close assistant</button>`);}
+function debitCard() {showSheet(`<h2>Your debit card</h2><p>View your everyday debit card.</p><div class="fake-card"><div class="row"><strong>Wells Fargo</strong><span>✦</span></div><p>EVERYDAY CHECKING</p><div class="fake-card-number">•••• •••• •••• 8787</div><div class="row"><span>${esc(getName()).toUpperCase()}</span><b>ACTIVE CASH</b></div></div><button class="primary-btn" data-action="sheet-close">Done</button>`);}
+function assistantSheet() {showSheet(`<div class="row" style="justify-content:flex-start;margin-bottom:15px"><span class="feature-icon">${icon('chat','lg')}</span><div><h2 style="margin:0">Ask Fargo</h2><span class="muted small">Your virtual banking assistant</span></div></div><div class="screen-simulation"><h3>Hi, ${esc(getName())}!</h3><p>Welcome to Wells Fargo. Your Everyday Checking balance is <strong>${money(SCENE_BALANCE_CENTS)}</strong>. What would you like to explore?</p></div><div class="search-suggest"><button data-action="account">View my balance</button><button data-action="transfer">Make a transfer</button><button data-action="security">Face ID settings</button></div><button class="secondary-btn" data-action="sheet-close">Close assistant</button>`);}
 function demoDeposit() {showSheet(`<h2>Deposit a check</h2><p>Deposit to your checking account.</p><div class="screen-simulation"><h3>Checking ••••8787</h3><p>Available balance: <strong>${money(SCENE_BALANCE_CENTS)}</strong></p></div><button class="primary-btn" data-action="deposit-complete">Continue</button>`);}
 function messageSheet(title, description) {showSheet(`<h2>${title}</h2><p>${description}</p><button class="primary-btn" data-action="sheet-close">Done</button>`);}
 const action = async name => {
   if (name==='show-password') {const input=$('#login-password');if(input){const start=input.selectionStart;state.showPassword=!state.showPassword;input.type=state.showPassword?'text':'password';const b=$('[data-action="show-password"]');if(b)b.textContent=state.showPassword?'Hide':'Show';try{input.setSelectionRange(start,start);}catch{} } return;}
-  if (name==='locations') {showSheet(`<h2>Locations</h2><p>Find BigBallerBank locations and services.</p><div class="screen-simulation"><h3>Location services</h3><p>Search is unavailable right now. Please try again later.</p></div><button class="primary-btn" data-action="sheet-close">Done</button>`);return;}
+  if (name==='locations') {showSheet(`<h2>Locations</h2><p>Find Wells Fargo locations and services.</p><div class="screen-simulation"><h3>Location services</h3><p>Search is unavailable right now. Please try again later.</p></div><button class="primary-btn" data-action="sheet-close">Done</button>`);return;}
   if (name==='login-help') {showSheet(`<h2>Sign-on assistance</h2><p>Need help accessing your account?</p><div class="screen-simulation"><h3>Account recovery</h3><p>Please contact customer support for assistance with your username or password.</p></div><button class="primary-btn" data-action="sheet-close">Back to sign on</button>`);return;}
   if (name==='enroll') return enrollPasskey();
   if (name==='unlock') return unlockPasskey();
@@ -373,11 +373,11 @@ const action = async name => {
   if (['accounts','account','deposit','transfer','explore','menu','notifications','search','security','settings'].includes(name)) {if(name==='notifications')state.notificationsRead=true; navigate(name);return;}
   if (name==='back') {navigate('accounts');return;}
   if (name.startsWith('product-')) {const p=products[name.substring(8)];if(p)showProduct(p.title,p.emoji,p.detail);return;}
-  if (name==='offer') {showProduct('The BigBaller Black Card','💳','A premium card with an unmistakable design and added benefits.');return;}
+  if (name==='offer') {showProduct('The Wells Fargo Active Cash Card','💳','A premium card with an unmistakable design and added benefits.');return;}
   if (name==='dismiss-offer') {sessionStorage.setItem(STORE.offer,'yes');render();return;}
   if (name==='credit-score') {infoSheet('BallerScore™','Monitor your credit profile with BallerScore™.');return;}
   if (name==='financial-goals') {infoSheet('Financial goals','Track your saving and spending goals in one place.');return;}
-  if (name==='rewards') {showProduct('BigBaller Rewards','✦','A collection of exclusive dining, shopping, and travel experiences.');return;}
+  if (name==='rewards') {showProduct('Wells Fargo Rewards','✦','A collection of exclusive dining, shopping, and travel experiences.');return;}
   if (name==='chat') {assistantSheet();return;}
   if (name==='edit-name') {editName();return;}
   if (name==='debit-card') {debitCard();return;}
@@ -386,18 +386,18 @@ const action = async name => {
   if (name==='deposit-demo') {demoDeposit();return;}
   if (name==='deposit-complete') {showSheet(`<div class="text-center" style="font-size:48px;color:#5d9863">${icon('check','xl')}</div><h2>Deposit unavailable</h2><p>Mobile deposit is currently unavailable. Your available balance remains <strong>${money(SCENE_BALANCE_CENTS)}</strong>.</p><button class="primary-btn" data-action="sheet-close">Done</button>`);return;}
   if (name==='message-security') {messageSheet('Security update','Your iPhone can authenticate with Face ID or your device passcode when you use an enrolled passkey.');return;}
-  if (name==='message-welcome') {messageSheet('Welcome to BigBallerBank','Thanks for joining BigBallerBank. Your account is ready.');return;}
+  if (name==='message-welcome') {messageSheet('Welcome to Wells Fargo','Thanks for joining Wells Fargo. Your account is ready.');return;}
   if (name==='clear-notifications') {state.notificationsRead=true;toast('All messages marked as read.');render();return;}
   if (name==='search-account') {navigate('account');return;}
   if (name==='search-face') {navigate('security');return;}
   if (name==='search-transfer') {navigate('transfer');return;}
   if (name==='search-card') {debitCard();return;}
-  if (name==='about') {showSheet(`<h2>About BigBallerBank</h2><p>BigBallerBank is an entirely fictional banking interface produced solely as a movie prop. No financial institution, account, card, transaction, credit product, payment, or deposit shown in this app is real.</p><div class="info-block">${icon('shield')} The displayed balance is deliberately fixed at <strong>${money(SCENE_BALANCE_CENTS)}</strong>. Transaction history and other account information are scripted, and no financial services are provided.</div><p style="margin-top:18px">This experience can invoke the iPhone's genuine Face ID or device passcode through a locally verified passkey. It does not use bank-grade authentication or a banking server and must never be used for actual financial data or transactions.</p><button class="primary-btn" data-action="sheet-close">Done</button>`);return;}
+  if (name==='about') {showSheet(`<h2>About Wells Fargo</h2><p>This is a scripted Wells Fargo-branded film prop, not an official banking application. The financial accounts, account balance, cards and transactions shown here are fictional. No real banking, payments or deposits are possible.</p><div class="info-block">${icon('shield')} The scripted checking balance is <strong>${money(SCENE_BALANCE_CENTS)}</strong>. Transaction history and other account information are scripted, and no financial services are provided.</div><p style="margin-top:18px">This experience can invoke the iPhone's genuine Face ID or device passcode through a locally verified passkey. It does not use bank-grade authentication or a banking server and must never be used for actual financial data or transactions.</p><button class="primary-btn" data-action="sheet-close">Done</button>`);return;}
 };
 app.addEventListener('click', e => {const btn=e.target.closest('[data-action]'); if(!btn || !app.contains(btn)) return; const result=action(btn.dataset.action); if(result?.catch)result.catch(err=>{console.error(err);toast('Something went wrong. Please try again.');});});
 document.addEventListener('click',e=>{const target=e.target.closest('#sheet-backdrop [data-action]');if(target){const result=action(target.dataset.action);if(result?.catch)result.catch(console.error);}});
 document.addEventListener('submit', e => {
-  if (e.target.id==='login-form') {e.preventDefault();const username=$('#login-username')?.value.trim()||'';const password=$('#login-password')?.value||'';if(!username||!password){toast('Enter your username and password.');return;}if($('#login-save')?.checked){localStorage.setItem(STORE.username,username);}else{localStorage.removeItem(STORE.username);}state.saveUsername=Boolean($('#login-save')?.checked);state.registrationError='';state.unlocked=true;state.view='accounts';closeSheet();render();window.scrollTo(0,0);return;}
+  if (e.target.id==='login-form') {e.preventDefault();const username=$('#login-username')?.value.trim()||'';const password=$('#login-password')?.value||'';if(!username||!password){toast('Enter your cast username and scene passphrase.');return;}if(username.toLowerCase()!=='cast' || password!=='scene'){state.registrationError='Production-only scripted sign-in. Use the cast credentials.';render();return;}if($('#login-save')?.checked){localStorage.setItem(STORE.username,username);}else{localStorage.removeItem(STORE.username);}state.saveUsername=Boolean($('#login-save')?.checked);state.registrationError='';state.unlocked=true;state.view='accounts';closeSheet();render();window.scrollTo(0,0);return;}
   if (e.target.id==='profile-form') {e.preventDefault();const name=$('#profile-name')?.value.trim();if(!name)return;localStorage.setItem(STORE.name,name.slice(0,36));closeSheet();render();toast('Your display name has been updated.');}
   if (e.target.id==='transfer-form') {
     e.preventDefault();
